@@ -27,3 +27,15 @@ function validate() {
     email.style.borderColor = ' #E2E8F0';
   }
 }
+
+// Função para mostrar o formulário de cadastro e ocultar o de login
+function showSignupForm() {
+  document.querySelector('.login-form').style.display = 'none';
+  document.querySelector('.signup-form').style.display = 'flex';
+}
+
+// Função para mostrar o formulário de login e ocultar o de cadastro
+function showLoginForm() {
+  document.querySelector('.login-form').style.display = 'flex';
+  document.querySelector('.signup-form').style.display = 'none';
+}

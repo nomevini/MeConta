@@ -32,6 +32,7 @@ a:hover {
   display: grid;
   grid-template-columns: 1fr;
   place-items: center;
+  overflow-y: auto; /* Adiciona a barra de rolagem vertical quando necessário */
 }
 
 .logo {
@@ -72,7 +73,7 @@ a:hover {
   color: #475569;
 }
 
-.login-form {
+.form {
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
@@ -154,7 +155,7 @@ a:hover {
   color: #49AA26;
 }
 
-.login-form button[type="submit"] {
+.form button[type="submit"] {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -173,39 +174,22 @@ a:hover {
   transition: .4s ease-in-out;
 }
 
-.login-form button[type="submit"]:hover {
+
+.form button[type="submit"]:hover {
   background: #3E9220;
 }
 
-.login-form span {
+
+.form span {
   font-weight: 400;
   font-size: 1.6rem;
   line-height: 2.4rem;
   color: #1E293B;
 }
 
-.login-form span a {
+.form span a {
   font-weight: 700;
   font-size: 1.6rem;
   line-height: 2.4rem;
   color: #49AA26;
-}
-
-
-/* Media Queries */
-
-@media (min-width: 1200px) {
-  .main {
-    grid-template-columns: 1fr 1fr;
-    place-items: unset;
-  }
-  .image {
-    display: block;
-  }
-}
-
-@media (max-width: 560px) {
-  .login {
-    margin: 4rem 5.6rem;
-  }
 }
