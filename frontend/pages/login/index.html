@@ -26,12 +26,12 @@
                 <div class="input-wrapper">
                     <label for="email">E-mail</label>
                     <input id="email" type="text" placeholder="Digite seu e-mail">
-                    <small class="error-message">Digite um e-mail válido</small>
+                    <small id="error-message">Digite um e-mail válido</small>
                 </div>
                 <div class="input-wrapper">
                     <div class="password-header">
                         <label for="password">Senha</label>
-                        <a href="">Esqueceu a senha?</a>
+                        <a href="../resetPassword/index.html">Esqueceu a senha?</a>
                     </div>
                     <input type="password" placeholder="Digite sua senha" id="input-password">
                     <img id="olho-off" src="assets/icon-eye-off.svg" alt="Ícone olho cortado" class="eye" onclick="handleEye('olho-off', 'olho-on')">
@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <button type="submit" onclick="validate();">Entrar</button>
+            <button type="submit" onclick="validate()">Entrar</button>
             <span>
                 Ainda não tem uma conta? <a href="#" onclick="showSignupForm()">Inscreva-se</a> 
             </span>
@@ -50,17 +50,17 @@
               <div class="input-wrapper">
                   <label for="name">Nome</label>
                   <input id="name" type="text" placeholder="ex: Vinícius">
-                  <small class="error-message">Digite seu nome</small>
+                  
               </div>
               <div class="input-wrapper">
                   <label for="lastname">Sobrenome</label>
                   <input id="lastname" type="text" placeholder="ex: Carvalho">
-                  <small class="error-message">Digite seu sobrenome</small>
+                  
               </div>
               <div class="input-wrapper">
                   <label for="signup-email">E-mail</label>
                   <input id="signup-email" type="text" placeholder="Digite seu e-mail">
-                  <small class="error-message">Digite um e-mail válido</small>
+                  <small id="error-message">Digite um e-mail válido</small>
               </div>
               <div class="input-wrapper">
                   <div class="password-header">
@@ -72,7 +72,7 @@
               </div>
           </div>
       
-          <button type="submit" onclick="">Cadastrar</button>
+          <button type="submit" onclick="validate()">Cadastrar</button>
           
           <span>
               Já tem uma conta? <a href="#" onclick="showLoginForm()">Faça login</a>

@@ -54,7 +54,7 @@ a:hover {
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 3rem;
   max-width: 38.4rem;
 }
 
@@ -192,4 +192,14 @@ a:hover {
   font-size: 1.6rem;
   line-height: 2.4rem;
   color: #49AA26;
+}
+
+
+.email-sent {
+  margin-top: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
 }
