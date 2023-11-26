@@ -1,12 +1,27 @@
 const Modal = {
-    modalElement: document.querySelector('.modal-overlay'),
-    open() {
-      this.modalElement.classList.add('active');
-    },
-    close() {
-      this.modalElement.classList.remove('active');
-    }
-};
+  open(transactionType, modalClass) {
+
+      const modal = document.querySelector(`.${modalClass}`)
+      const modalTitle = document.querySelector("#modal-title")
+      
+      modalTitle.innerText = `${capitalizeFirstLetter(transactionType)}`
+
+      modal.classList.add("active")
+  },
+  close(modalClass) {
+      document
+          .querySelector(`.${modalClass}`)
+          .classList
+          .remove("active")
+  }
+}
+
+function capitalizeFirstLetter(string) {
+  let arrayString = string.split('')
+  let firstLetter = arrayString[0].toUpperCase()
+  let remaining = arrayString.slice(1, arrayString.length)
+  return firstLetter + remaining.join('')
+}
 
 const ModalDetalhes = {
     modalElement: document.querySelector('.modal-detalhes'),
@@ -71,3 +86,13 @@ function showToast(message) {
         toast.style.display = "none";
     }, 3000); // Oculta o toast após 3 segundos
 }
+
+/* Abrir o menu de sanduíche */
+document.addEventListener('DOMContentLoaded', function () {
+  const menuIcon = document.getElementById('menu-icon');
+  const navbar = document.getElementById('navbar');
+
+  menuIcon.addEventListener('click', function () {
+    navbar.classList.toggle('show');
+  });
+});

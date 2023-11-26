@@ -21,7 +21,11 @@
     opacity: 1;
     visibility: visible;
 }
+
 .modal {
+
+    width: 90%;
+    max-width: 500px;
     
     background: var(--background-modal);
 
@@ -33,6 +37,9 @@
 
 .modal-info {
     
+    width: 90%;
+    max-width: 500px;
+
     background: var(--background-modal);
 
     padding: 2.4rem;
@@ -45,21 +52,30 @@
     margin: 1rem 0 0.8rem;
 }
 
-.buttons-modal button {
-    width: 32%;
-    opacity: 0.9;
-    
+.buttons-modal {
+    margin-top: 1.4rem;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.buttons-modal button {   
     font-weight: bold;
+    opacity: 0.9; 
+    margin: 0.5rem;
 }
 
 .buttons-modal button:hover{
     opacity: 1;
-
 } 
+
+#modal-delete-button {
+    height: 50px;
+}
 
 @media (min-width: 800px) {
     .modal {
-        width: 40%;
+        width: 90%;
         max-width: 500px;
     }
     .modal-info {
@@ -68,13 +84,15 @@
     }
 
     .buttons-modal {
-        margin-top: 1.4rem;
+        
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     }
 
-    
+    .buttons-modal button {
+        width: 32%;
+    }
 
-    
+
 }

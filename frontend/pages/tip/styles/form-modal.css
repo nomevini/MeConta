@@ -5,22 +5,8 @@
 #form h2 {
     margin-top: 0;
 }
+
 input {
-    width: 100%;
-
-    padding: 0.8rem;
-
-    border: none;
-    border-radius: 0.2rem;
-    -webkit-border-radius: 0.2rem;
-    -moz-border-radius: 0.2rem;
-    -ms-border-radius: 0.2rem;
-    -o-border-radius: 0.2rem;
-}
-
-select {
-    background-color: white;
-
     width: 100%;
 
     padding: 0.8rem;
@@ -66,8 +52,6 @@ small.help-for-modal {
     -o-transition: all 0.5s;
 }
 
-
-
 .button.cancel {
     height: 50px;
     
@@ -86,6 +70,7 @@ small.help-for-modal {
 
     opacity: 0.6;
 }
+
 .button.cancel:hover {
     opacity: 1;
 
@@ -94,4 +79,27 @@ small.help-for-modal {
     -moz-transition: all 0.3s;
     -ms-transition: all 0.3s;
     -o-transition: all 0.3s;
+}
+
+#description {
+    border: none;
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 400px;
+
+    padding: 10px;
+}
+
+#modal-delete-button {
+    height: 50px;
+
+    color: white;
+}
+
+.red {
+    background-color: var(--normal-red);
+}
+
+#form p {
+    text-align: justify;
 }
