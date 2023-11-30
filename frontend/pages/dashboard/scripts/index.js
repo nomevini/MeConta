@@ -22,6 +22,7 @@ function capitalizeFirstLetter(string) {
     let remaining = arrayString.slice(1, arrayString.length)
     return firstLetter + remaining.join('')
 }
+
 const CardColor = {
     positive() {
         document
@@ -177,7 +178,7 @@ const Form = {
         } catch (error) {
             console.warn(error.message)
             toastError(error.message)
-            //alert(error.message)
+            
         }
     }
 }
