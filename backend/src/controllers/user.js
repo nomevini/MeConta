@@ -70,7 +70,7 @@ const login = async (req, res) => {
         if (user && bcrypt.compareSync(senha, user.senha)) {
 
             // Gerar um token JWT
-            const token = jwt.sign({ userId: user.id }, jwt_credentials.password, { expiresIn: '8h' });
+            const token = jwt.sign({ userId: user.id, admin: user.admin }, jwt_credentials.password, { expiresIn: '8h' });
 
             const {senha: _, ...authenticatedUser} = user.dataValues
 
