@@ -1,11 +1,11 @@
-function handleEye(id1, id2) {
+function handleEye(id1, id2, password) {
   var img1 = document.getElementById(id1);
   var img2 = document.getElementById(id2);
 
   img1.classList.add("d-none");
   img2.classList.remove("d-none");
 
-  var input = document.getElementById('input-password');
+  var input = document.getElementById(`${password}`);
 
   if (input.type === "password") {
     input.type = "text";
