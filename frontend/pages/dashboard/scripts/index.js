@@ -186,6 +186,7 @@ const Form = {
 
 function toastError(message = "ERRO!") {
     const toastId = document.querySelector("#toast")
+
     toastId.className = "show"
 
     setTimeout(() => {

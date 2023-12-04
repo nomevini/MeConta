@@ -2,6 +2,9 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const jwt_credentials = require('../../jwt_credentials')
 const jwt = require('jsonwebtoken')
+const generateToken = require('../utils/token')
+const generateHtmlContent = require('../utils/htmlResetEmail');
+const transporter = require('../utils/transporter')
 
 const registerUser = async (req, res) => {
     try {
@@ -9,6 +12,7 @@ const registerUser = async (req, res) => {
 
     // Verifica se o e-mail já está cadastrado
     const usuarioExistente = await User.findOne({ where: { email } });
+    
     if (usuarioExistente) {
         return res.status(400).json({ error: 'E-mail já cadastrado' });
     }
@@ -84,8 +88,88 @@ const login = async (req, res) => {
     }
 };
 
+const resetPassword = async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        // Encontrar o usuário com base no email
+        const user = await User.findOne({ where: { email } });
+
+        // gerar um token para recuperacao de senha
+        const emailToken = generateToken()
+
+        if (user) {
+            // enviar email com o token
+            const mailOptions = {
+                from: 'sousav387@gmail.com', // Remetente
+                to: `${email}`, // Destinatário
+                subject: 'MeConta - Recuperacao de senha',
+                html: generateHtmlContent(`${emailToken}`)
+            };
+
+            // inserir token no usuario
+            await user.update({
+                token: `${emailToken}`
+            })
+            
+            // Enviar e-mail
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    res.status(500).json({ error: 'Erro interno no servidor' });
+                } else {
+                    res.status(200).json({message: 'Email enviado com sucesso'})
+                }
+            });
+        }else {
+            res.status(404).json({message: 'usuario não encontrado'})
+        }
+        
+    
+    } catch (error) {
+        console.error('Erro no login:', error);
+        res.status(500).json({ error: 'Erro interno no servidor' });
+    }
+}
+
+const updatePassword = async (req, res) => {
+    const token = req.params.token
+    const {email, senha} = req.body
+
+    console.log(token, senha, email)
+
+    try {
+        
+        // buscar token
+        const user = await User.findOne({ where: { email } });
+
+        if(token){
+            if (user.token === token) {
+                // atualizar senha
+                const senhaHash = await bcrypt.hash(senha, 10);
+
+                await user.update({
+                    senha: senhaHash,
+                    token: null
+                })
+
+                return res.status(200).json({message: "Senha atualizada com sucesso"})
+            }else {
+                return res.status(401).json({error: 'Token inválido'})
+            }
+        }else {
+            return res.status(401).json({error: 'Token inválido'})
+        }
+        
+    } catch (error) {
+        console.error('Erro no login:', error);
+        res.status(500).json({ error: 'Erro interno no servidor' });
+    }
+}
+
 module.exports = {
     registerUser,
     deleteUser,
-    login
+    login,
+    resetPassword,
+    updatePassword
 }
