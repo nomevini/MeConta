@@ -1,8 +1,6 @@
 import { token, decodedToken } from "./authorization.js";
 
 async function loadTipCategories(userId, accessToken) {
-    
-    console.log(userId)
 
     try {
         let response = await fetch(`http://localhost:3000/categoria/${userId}`, {
@@ -13,7 +11,7 @@ async function loadTipCategories(userId, accessToken) {
             },
         });
  
-         if (!response.ok) {
+        if (!response.ok) {
             const error = await response.json()
             throw new Error(error.error);
         }

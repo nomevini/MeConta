@@ -32,7 +32,7 @@ routes.get('/metodo-pagamento') // listar os metodos de pagamento
 routes.get('/relatorio') // gerar relatorio de gastos mensais
 routes.get('/transacoes/filtrar') // filtrar transacao
 
-routes.post('/dica', createTip) // postar dica financeira
+routes.post('/dica/:userId', createTip) // postar dica financeira
 routes.get('/dica') // listar dicas financeiras
 routes.put('/dica') // editar dica financeira
 routes.delete('/dica') // deletar uma dica financeira
