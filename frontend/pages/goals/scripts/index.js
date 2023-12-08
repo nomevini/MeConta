@@ -96,3 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
     navbar.classList.toggle('show');
   });
 });
+
+function logout(){
+  window.location.href = '../login/index.html';
+}
