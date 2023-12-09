@@ -1,10 +1,10 @@
 const Categoria = require('../models/transactionCategory')
 const Dica = require('../models/financialTip')
+require('../models/index')
 
 const createTip = async (req, res) => {
     const {titulo, categoria, descricao} = req.body
     const {userId} = req.params
-
     
     try {
         
@@ -43,6 +43,57 @@ const createTip = async (req, res) => {
     }
 }
 
+const getTip = async (req, res) => {
+    try {
+        const pagina = parseInt(req.query.pagina) || 1;
+        const itensPorPagina = parseInt(req.query.itensPorPagina) || 6;
+
+        const { count, rows } = await Dica.findAndCountAll({
+            offset: (pagina - 1) * itensPorPagina,
+            limit: itensPorPagina,
+            include: [{ model: Categoria, attributes: ['nome'] }],
+            order: [['dataPublicacao', 'DESC']], // Adiciona esta linha para ordenar por data de publicação decrescente
+        });
+
+        const totalPaginas = Math.ceil(count / itensPorPagina);
+
+        res.status(200).json({
+            paginaAtual: pagina,
+            totalPaginas: totalPaginas,
+            dicas: rows,
+        });
+
+    } catch (error) {
+        console.error('Erro:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+}
+
+const updateTip = async (req, res) => {
+    try {
+        const id = req.params.id; 
+        const descricao = req.body.descricao; 
+
+        const dicaExistente = await Dica.findByPk(id);
+
+        if (!dicaExistente) {
+            return res.status(404).json({ error: 'Dica financeira não encontrada.' });
+        }
+
+        await dicaExistente.update({
+            descricao: descricao,
+        });
+
+        res.status(200).json({ message: 'Dica financeira atualizada com sucesso.', dica: dicaExistente });
+
+    } catch (error) {
+        console.error('Erro:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+}
+
 module.exports = {
-    createTip
+    createTip,
+    getTip,
+    updateTip
 }

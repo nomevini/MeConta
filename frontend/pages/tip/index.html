@@ -65,18 +65,7 @@
             </button>
         </div>
 
-        <section id="main-content">
-            <section onclick="Modal.open('Dica', 'modal-dica-completa')" class="post">
-                <h2>Como Economizar Dinheiro no Dia a Dia</h2>
-                <p class="category">Categoria: Finanças Pessoais</p>
-                <p class="content">Economizar dinheiro pode parecer desafiador, mas com algumas práticas simples, você pode fazer uma grande diferença no seu orçamento. Considere cortar pequenos gastos desnecessários, como café comprado diariamente. Além disso, criar um plano de gastos mensal pode ajudar a manter o controle das suas finanças. Lembre-se, pequenas economias diárias podem se transformar em grandes economias ao longo do tempo.</p>
-            </section>
-    
-            <section onclick="Modal.open('Dica', 'modal-dica-completa')" class="post">
-                <h2>Introdução ao Mundo dos Investimentos</h2>
-                <p class="category">Categoria: Investimentos</p>
-                <p class="content">Investir pode ser uma maneira eficaz de fazer seu dinheiro trabalhar para você. Antes de começar, é crucial entender os conceitos básicos. Diversificar seu portfólio, compreender o perfil de risco e escolher investimentos alinhados com seus objetivos são passos essenciais. Lembre-se, o mundo dos investimentos pode parecer complexo no início, mas com o tempo e a educação, você pode tomar decisões financeiras mais informadas.</p>
-            </section>
+        <section id="main-content">            
         </section>
     </main>
 
@@ -118,13 +107,13 @@
     <div class="modal-overlay modal-dica-completa">
         <div class="modal">
             <div id="form">
-                <h2>Como Economizar Dinheiro no Dia a Dia</h2>
-                <p class="category">Categoria: Finanças Pessoais</p>
+                <h2 id="modal-titulo" >Como Economizar Dinheiro no Dia a Dia</h2>
+                <p  id="modal-categoria" class="category">Categoria: Finanças Pessoais</p>
                 <textarea id="complete-description" class="content">Economizar dinheiro pode parecer desafiador, mas com algumas práticas simples, você pode fazer uma grande diferença no seu orçamento. Considere cortar pequenos gastos desnecessários, como café comprado diariamente. Além disso, criar um plano de gastos mensal pode ajudar a manter o controle das suas finanças. Lembre-se, pequenas economias diárias podem se transformar em grandes economias ao longo do tempo.</textarea>
         
                 <div class="input-group actions complete-tip">
                     <a href="#" onclick="Modal.close('modal-dica-completa')" class="button cancel">Voltar</a>
-                    <button class="save-tip" id="modal-button" type="submit">Salvar</button>
+                    <button class="save-tip" id="modal-button" >Salvar</button>
                     <button id="modal-delete-button" class="red" type="submit">Excluir dica</button>
                 </div>
             </div>
@@ -180,12 +169,10 @@
         <div class="description">Por favor, preencha todos os campos!</div>
     </div>
 
-    <div class="pagination">
-        <!--<a href="#" class="nav-link">&#60;</a>-->
-        <a href="#" class="nav-link">1</a>
-        <a href="#" class="page-link">2</a>
-        <a href="#" class="page-link">3</a>
-        <a href="#" class="page-link">&#62;</a>
+    <div class="pagination" id="pagination">
+        <a href="#" class="page-link" onclick="selecionarPagina(1)">1</a>
+        <a href="#" class="page-link" onclick="selecionarPagina(2)">2</a>
+        <a href="#" class="page-link" onclick="selecionarPagina(3)">3</a>
     </div>
 
     <footer class="footer">
@@ -196,6 +183,7 @@
     <script src="./scripts/authorization.js" type="module"></script>
     <script src="./scripts/loadTipCategory.js" type="module"></script>
     <script src="./scripts/tip.js" type="module"></script>
+    <script src="./scripts/pagination.js" type="module"></script>
 
 </body>
 </html>

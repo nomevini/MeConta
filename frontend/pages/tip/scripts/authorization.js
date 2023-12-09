@@ -51,4 +51,4 @@ if(!decodedToken.admin){
     textarea.parentNode.replaceChild(paragrafo, textarea);
 }
 
-export {decodedToken, token};
+export {parseJwt};

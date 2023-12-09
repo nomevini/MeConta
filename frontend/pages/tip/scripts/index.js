@@ -1,5 +1,5 @@
 const Modal = {
-    open(transactionType, modalClass) {
+    open(transactionType, modalClass, tip) {
 
         const modal = document.querySelector(`.${modalClass}`)
         const modalTitle = document.querySelector("#modal-title")
@@ -7,6 +7,13 @@ const Modal = {
         modalTitle.innerText = `${capitalizeFirstLetter(transactionType)}`
 
         modal.classList.add("active")
+
+        if (modalClass == 'modal-dica-completa') {
+            document.getElementById('modal-titulo').innerHTML = tip.titulo
+            document.getElementById('modal-titulo').setAttribute('data-id', `${tip.id}`)
+            document.getElementById('modal-categoria').innerHTML = tip.categoria
+            document.getElementById('complete-description').innerText = tip.descricao                
+        }
     },
     close(modalClass) {
         document
