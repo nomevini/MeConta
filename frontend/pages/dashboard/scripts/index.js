@@ -245,5 +245,5 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function logout(){
-    window.location.href = '../login/index.html';
+    window.location.href = '../notAuthorized/index.html';
 }
