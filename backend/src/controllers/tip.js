@@ -92,8 +92,31 @@ const updateTip = async (req, res) => {
     }
 }
 
+const deleteTip = async (req, res) => {
+    try {
+        const id = req.params.id;
+    
+        // Verifica se a dica existe
+        const dicaExistente = await Dica.findByPk(id);
+    
+        if (!dicaExistente) {
+          return res.status(404).json({ error: 'Dica não encontrada.' });
+        }
+    
+        // Realiza a exclusão da dica
+        await dicaExistente.destroy();
+    
+        res.status(200).json({ message: 'Dica excluída com sucesso.' });
+    
+      } catch (error) {
+        console.error('Erro:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+}
+
 module.exports = {
     createTip,
     getTip,
-    updateTip
+    updateTip,
+    deleteTip
 }

@@ -1,7 +1,7 @@
 const express = require('express')
 const { registerUser, deleteUser, login, resetPassword, updatePassword } = require('../controllers/user')
 const authentication = require('../middlewares/authentication')
-const { createTip, getTip, updateTip } = require('../controllers/tip')
+const { createTip, getTip, updateTip, deleteTip } = require('../controllers/tip')
 const { createCategory, getCategory } = require('../controllers/category')
 
 const routes = express()
@@ -35,7 +35,7 @@ routes.get('/transacoes/filtrar') // filtrar transacao
 routes.post('/dica/:userId', createTip) // postar dica financeira
 routes.get('/dicas', getTip) // listar dicas financeiras
 routes.put('/dica/:id', updateTip) // editar dica financeira
-routes.delete('/dica') // deletar uma dica financeira
+routes.delete('/dica/:id', deleteTip) // deletar uma dica financeira
 
 routes.get('/metas') // listar metas financeiras
 routes.post('/metas') // criar meta financeira

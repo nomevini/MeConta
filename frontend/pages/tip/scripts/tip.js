@@ -30,11 +30,12 @@ document.getElementById('form-create-tip').addEventListener('submit', async func
         console.log("Dica cadastrada com sucesso")
             
     } catch (error) {
-        console.error('Erro no cadastro de usuário:', error);
+        console.error('Erro na criação da dica:', error);
         toastError(error.message)
     }
 })
 
+// editar dica
 document.querySelector('.save-tip').addEventListener('click', async function(e) {
     const tipId = document.getElementById('modal-titulo').getAttribute('data-id')
     const description = document.getElementById('complete-description').value;
@@ -57,11 +58,43 @@ document.querySelector('.save-tip').addEventListener('click', async function(e) 
             throw new Error(error.error);
         }
 
-        const data = await response.json()
-        
         location.reload()
 
     } catch (error) {
-        
+        console.error('Erro na edição da dica:', error);
+        toastError(error.message)
+    }
+})
+
+// deletar dica
+document.querySelector('#modal-delete-button').addEventListener('click', async function(e) {
+    const tipId = document.getElementById('modal-titulo').getAttribute('data-id')
+
+    try {
+
+        const token = sessionStorage.getItem('token')
+
+        let response = await fetch(`http://localhost:3000/dica/${tipId}`, {
+            method: 'DELETE',
+            headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            const error = await response.json()
+            throw new Error(error.error);
+        }
+
+        toastError("Dica excluída com sucesso")
+
+        setTimeout(function() {
+            location.reload();
+        }, 5000);
+
+    } catch (error) {
+        console.error('Erro na exclusão da dia:', error);
+        toastError(error.message)
     }
 })
