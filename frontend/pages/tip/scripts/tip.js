@@ -86,12 +86,8 @@ document.querySelector('#modal-delete-button').addEventListener('click', async f
             const error = await response.json()
             throw new Error(error.error);
         }
-
-        toastError("Dica excluída com sucesso")
-
-        setTimeout(function() {
-            location.reload();
-        }, 5000);
+        
+        location.reload();
 
     } catch (error) {
         console.error('Erro na exclusão da dia:', error);

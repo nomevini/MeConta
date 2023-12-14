@@ -82,6 +82,14 @@
                 
               </thead>
               <tbody>
+                <tr id="ele" onclick="ModalDetalhes.open(this)">
+                    <td>item</td>
+                    <td>item</td>
+                    <td>item</td>
+                    <td>item</td>
+                    <td>item</td>
+                    <td>item</td>
+                </tr>
               </tbody>
             </table>
         </section>
@@ -242,6 +250,12 @@
     <div id="toast">
         <div class="img"><h1>×</h1></div>
         <div class="description">Por favor, preencha todos os campos!</div>
+    </div>
+
+    <div class="pagination" id="pagination">
+        <a href="#" class="page-link" onclick="selecionarPagina(1)">1</a>
+        <a href="#" class="page-link" onclick="selecionarPagina(2)">2</a>
+        <a href="#" class="page-link" onclick="selecionarPagina(3)">3</a>
     </div>
 
     <footer><small>© 2023 - MeConta</small></footer>

@@ -25,11 +25,11 @@ function capitalizeFirstLetter(string) {
 
 const ModalDetalhes = {
     modalElement: document.querySelector('.modal-detalhes'),
-    open() {
-      this.modalElement.classList.add('active');
+    open(element) {    
+        this.modalElement.classList.add('active');
     },
     close() {
-      this.modalElement.classList.remove('active');
+        this.modalElement.classList.remove('active');
     }
 };
 
