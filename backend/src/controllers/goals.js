@@ -4,9 +4,9 @@ const MetaFinanceira = require('../models/financialGoal')
 const createGoal = async (req, res) => {
     try {
 
-        const {titulo, valor, descricao, dataInicio, dataFinal, usuarioId} = req.body
+        const {titulo, valor, descricao, dataInicio, dataFinal, usuarioId, status} = req.body
 
-        if (!titulo || !valor || !descricao || !dataInicio || !dataFinal) {
+        if (!titulo || !valor || !descricao || !dataInicio || !dataFinal || !status) {
             return res.status(400).json({message: "Campos obrigatórios não fornecidos"})
         }
 
@@ -26,6 +26,7 @@ const createGoal = async (req, res) => {
             descricao,
             dataInicio,
             dataFinal,
+            status,
             usuarioId
         })
 

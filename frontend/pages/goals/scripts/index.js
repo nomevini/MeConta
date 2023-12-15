@@ -23,9 +23,27 @@ function capitalizeFirstLetter(string) {
   return firstLetter + remaining.join('')
 }
 
+function formatStringDate(data) {
+    var dia  = data.split("/")[0];
+    var mes  = data.split("/")[1];
+    var ano  = data.split("/")[2];
+  
+    return ano + '-' + ("0"+mes).slice(-2) + '-' + ("0"+dia).slice(-2);
+    // Utilizo o .slice(-2) para garantir o formato com 2 digitos.
+  }
+  
 const ModalDetalhes = {
     modalElement: document.querySelector('.modal-detalhes'),
     open(element) {    
+        console.log(element)
+
+        document.getElementById('title-detail').value = element.titulo
+        document.getElementById('amount-detail').value = element.valor
+        document.getElementById('description-detail').value = element.descricao
+        document.getElementById('start-date-detail').value = formatStringDate(element.dataInicio)
+        document.getElementById('end-date-detail').value = formatStringDate(element.dataFinal)
+        document.getElementById('stats-detail').value = element.status
+
         this.modalElement.classList.add('active');
     },
     close() {
