@@ -91,42 +91,42 @@
                 <form id="goal-form" action="" onsubmit="Form.submit(event)">
                     <div class="input-group">
                         <label for="title" class="sr-only">Título</label>
-                        <input type="text" id="title" name="title" placeholder="Título da meta">
+                        <input type="text" id="title-create" name="title" placeholder="Título da meta">
                     </div>
 
                     <div class="input-group">
                         <label for="amount" class="sr-only">Valor da meta</label>
-                        <input type="number" id="amount" name="amount" placeholder="0,00" step="0.01">
+                        <input type="number" id="amount-create" name="amount" placeholder="0,00" step="0.01">
                     </div>
 
                     <div class="input-group">
                         <label for="description" class="sr-only">Descrição</label>
-                        <input type="" id="description" name="description" placeholder="Descrição">
+                        <input type="" id="description-create" name="description" placeholder="Descrição">
                     </div>
 
                     <div class="input-group">
                         <label for="date" class="sr-only">Data de início</label>
-                        <input type="date" id="start-date" name="date">
+                        <input type="date" id="start-date-create" name="date">
                     </div>
 
                     <div class="input-group">
                         <label for="date" class="sr-only">Data final</label>
-                        <input type="date" id="end-date" name="date">
+                        <input type="date" id="end-date-create" name="date">
                     </div>
 
                     <div class="input-group">
                         <label for="stats" class="sr-only">Status</label>
-                        <select name="stats" id="stats">
+                        <select name="stats" id="stats-create">
                             <option value="Pendente">Pendente</option>
-                            <option value="concluido">Concluído</option>
+                            <option value="Concluido">Concluído</option>
                         </select>
                     </div>
 
                     <div class="input-group actions">
                         <a href="#" onclick="Modal.close('modal-meta')" class="button cancel">Cancelar</a>
-                        <button id="modal-button" onclick="addGoal(event)" type="submit">Salvar</button>
+                        <button class="create-goal" id="modal-button" type="submit">Salvar</button>
                     </div>
-                </form>
+                </form> 
             </div>
         </div>
     </div>
@@ -166,15 +166,15 @@
                         <label for="stats" class="sr-only">Status</label>
                         <select name="stats" id="stats-detail">
                             <option value="Pendente">Pendente</option>
-                            <option value="concluido">Concluído</option>
+                            <option value="Concluido">Concluído</option>
                         </select>
                     </div>
                     
                     <div class="buttons-modal">
-                        <button id="modal-button" onclick="" >Salvar</button>
+                        <button id="modal-button" class="save-button" >Salvar</button>
                         <button id="modal-button" onclick="" >Relacionar transação a meta</button>
                         <button id="modal-delete-button" onclick="" class="red">Excluir meta</button>
-                        <button class="button cancel" onclick="Modal.close('modal-detalhes')">Cancelar</button>
+                        <button class="button cancel" onclick="ModalDetalhes.close()">Cancelar</button>
                     </div>
 
                     <section id="transaction">
@@ -258,5 +258,8 @@
     <script src="./scripts/authorization.js" type="module"></script>
     <script src="./scripts/loadGoals.js" type="module"></script>
     <script src="./scripts/pagination.js" type="module"></script>
+    <script src="./scripts/addGoal.js" type="module"></script>
+    <script src="./scripts/deleteGoal.js" type="module"></script>
+    <script src="./scripts/editGoal.js" type="module"></script>
 </body>
 </html>

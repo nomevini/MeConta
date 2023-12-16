@@ -21,8 +21,6 @@ async function loadGoals({pagina=1,itensPorPagina=6}) {
         const data = await response.json()
         const table = document.getElementById('table-body')
 
-        console.log(data.metas)
-
         data.metas.forEach(meta => {
             const goal = document.createElement('tr');
             goal.setAttribute('id', `${meta.id}`)

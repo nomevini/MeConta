@@ -3,12 +3,15 @@ const MetaFinanceira = require('../models/financialGoal')
 
 const createGoal = async (req, res) => {
     try {
+        console.log(req.body)
 
         const {titulo, valor, descricao, dataInicio, dataFinal, usuarioId, status} = req.body
-
+        
+        
         if (!titulo || !valor || !descricao || !dataInicio || !dataFinal || !status) {
             return res.status(400).json({message: "Campos obrigatórios não fornecidos"})
         }
+
 
         const usuario = await Usuario.findOne({
             where: {
@@ -79,10 +82,10 @@ const getGoals = async (req, res) => {
 const updateGoal = async (req, res) => {
     try {
         
-        const {titulo, valor, descricao, dataInicio, dataFinal, usuarioId} = req.body
+        const {titulo, valor, descricao, dataInicio, dataFinal, usuarioId, status} = req.body
         const id = req.params.metaId
 
-        if (!titulo || !valor || !descricao || !dataInicio || !dataFinal || !usuarioId) {
+        if (!titulo || !valor || !descricao || !dataInicio || !dataFinal || !usuarioId || !status) {
             return res.status(400).json({message: "Campos obrigatórios não fornecidos"})
         }
 
@@ -103,7 +106,8 @@ const updateGoal = async (req, res) => {
             valor,
             descricao,
             dataInicio,
-            dataFinal
+            dataFinal,
+            status
         })
 
         return res.status(200).json({message: "Meta editada com sucesso"})
