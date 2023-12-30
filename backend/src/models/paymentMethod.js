@@ -23,6 +23,10 @@ const PaymentMethod = sequelize.define('MetodoPagamento', {
   dataRenovacao: {
     type: DataTypes.DATE,
     allowNull: false
+  },
+  usuarioId: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 }, {
   freezeTableName: true,
