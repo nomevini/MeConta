@@ -52,17 +52,6 @@ const ModalDetalhes = {
     }
 };
 
-// Função para exibir um toast
-function showToast(message) {
-    var toast = document.getElementById("toast");
-    toast.getElementsByClassName("description")[0].innerHTML = message;
-    toast.style.display = "flex";
-
-    setTimeout(function () {
-        toast.style.display = "none";
-    }, 3000); // Oculta o toast após 3 segundos
-}
-
 /* Abrir o menu de sanduíche */
 document.addEventListener('DOMContentLoaded', function () {
   const menuIcon = document.getElementById('menu-icon');
