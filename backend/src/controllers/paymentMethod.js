@@ -52,26 +52,41 @@ const createPaymentMethod = async (req, res) => {
 
 const getPaymentMethods = async (req, res) => {
     try {
-        const userId = req.usuario.id
 
-        // verificar se o usuario existe
-        const user = await Usuario.findOne({
-            where: {
-                id: userId
-            }
-        })
+        const {userId} = req.params
 
-        if (!user) {
-            return res.status(404).json({message: "Usuário não encontrado"})
+        if (!userId) {
+            return res.status(400).json({ error: 'Campos obrigatórios não fornecidos.' });
         }
 
-        const methods = await MetodoPagamento.findAll({
-            where: {
-                usuarioId: userId
-            }
-        })
+        let usuarioId = userId
 
-        return res.status(200).json(methods)
+        const usuarioExistente = await Usuario.findByPk(usuarioId);
+
+        if (!usuarioExistente) {
+            return res.status(404).json({ error: 'Usuário não encontrado.' });
+        }
+
+        const userAdmin = 1;
+
+        // buscar todas as categorias desses ususarios  
+        const metodoPagamentoAdmin = await MetodoPagamento.findAll({
+            where: { usuarioId: userAdmin },
+            attributes: ['nome'],
+        });
+  
+        const metodoPagamentoUsuario = await MetodoPagamento.findAll({
+            where: { usuarioId: usuarioId },
+            attributes: ['nome'],
+        });
+
+        if (!metodoPagamentoUsuario.length) {
+            return res.status(200).json(metodoPagamentoAdmin)
+        }else if (userId == userAdmin) {
+            return res.status(200).json(metodoPagamentoAdmin) // se o usuario for admin
+        }else {
+            return res.status(200).json(metodoPagamentoAdmin.concat(metodoPagamentoUsuario))
+        }  
     } catch (error) {
         return res.status(500).json({message:"Erro interno do servidor"})
     }

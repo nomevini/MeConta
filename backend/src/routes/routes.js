@@ -33,7 +33,7 @@ routes.post('/categoria', createCategory) // cadastrar uma categoria
 routes.get('/categoria/:userId', getCategory) // listar uma categoria
 
 routes.post('/metodo-pagamento', createPaymentMethod) // cadastrar um metodo de pagamento
-routes.get('/metodo-pagamento', getPaymentMethods) // listar os metodos de pagamento
+routes.get('/metodo-pagamento/:userId', getPaymentMethods) // listar os metodos de pagamento
 routes.delete('/metodo-pagamento/:id', deletePaymentMethod) // deletar um metodo de pagamento
 
 routes.get('/relatorio') // gerar relatorio de gastos mensais
