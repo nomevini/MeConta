@@ -4,6 +4,8 @@ const authentication = require('../middlewares/authentication')
 const { createTip, getTip, updateTip, deleteTip } = require('../controllers/tip')
 const { createCategory, getCategory } = require('../controllers/category')
 const {createGoal, getGoals, deleteGoal, updateGoal} = require('../controllers/goals')
+const { createTransaction } = require('../controllers/transaction')
+const { createPaymentMethod } = require('../controllers/paymentMethod')
 
 const routes = express()
 
@@ -23,13 +25,17 @@ routes.delete('/usuario', deleteUser) // Deletar usuario
 
 routes.get('/balanco', ) // buscar despesa mensal, receita mensal e balanco
 routes.get('/transacoes', ) // listar as despesas de um usuario
-routes.post('/transacoes', ) // cadastrar uma despesa ou receita de um usuario
-routes.put('/transacoes', ) // editar uma despesa ou receita de um usuario
+routes.post('/transacoes', createTransaction) // cadastrar uma despesa ou receita de um usuario
+routes.put('/transacoes/:id', ) // editar uma despesa ou receita de um usuario
+routes.delete('/transacoes/:id', ) // editar uma despesa ou receita de um usuario
 
 routes.post('/categoria', createCategory) // cadastrar uma categoria
 routes.get('/categoria/:userId', getCategory) // listar uma categoria
-routes.post('/metodo-pagamento') // cadastrar um metodo de pagamento
+
+routes.post('/metodo-pagamento', createPaymentMethod) // cadastrar um metodo de pagamento
 routes.get('/metodo-pagamento') // listar os metodos de pagamento
+routes.delete('/metodo-pagamento/:id') // deletar um metodo de pagamento
+
 routes.get('/relatorio') // gerar relatorio de gastos mensais
 routes.get('/transacoes/filtrar') // filtrar transacao
 

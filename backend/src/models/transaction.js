@@ -38,7 +38,7 @@ const Transaction = sequelize.define('Transacao', {
   },
   metaId: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   usuarioId: {
     type: DataTypes.INTEGER,
