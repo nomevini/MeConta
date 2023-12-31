@@ -4,6 +4,8 @@ const Usuario = require("../models/user")
 const createPaymentMethod = async (req, res) => {
     try {
 
+   
+
         const {nome, renovarSaldo, valorAdicionado, dataRenovacao, usuarioId} = req.body
 
         if (!nome || !renovarSaldo || !valorAdicionado || !dataRenovacao | !usuarioId) {
@@ -37,7 +39,7 @@ const createPaymentMethod = async (req, res) => {
             nome,
             renovarSaldo,
             valorAdicionado,
-            dataRenovacao,
+            dataRenovacao: new Date(dataRenovacao),
             usuarioId
         })
 

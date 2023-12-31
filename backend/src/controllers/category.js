@@ -2,14 +2,12 @@ const Categoria = require('../models/transactionCategory')
 const Usuario = require('../models/user')
 
 const createCategory = async (req, res) => {
-    const { nome, userId } = req.body;
+    const { nome, usuarioId } = req.body;
 
     try {
-        if (!nome || !userId) {
+        if (!nome || !usuarioId) {
             return res.status(400).json({ error: 'Campos obrigatórios não fornecidos.' });
         }
-
-        const usuarioId = userId
 
         const usuarioExistente = await Usuario.findByPk(usuarioId);
         if (!usuarioExistente) {
