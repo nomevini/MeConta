@@ -48,6 +48,34 @@ const createPaymentMethod = async (req, res) => {
     }
 }
 
+const getPaymentMethods = async (req, res) => {
+    try {
+        const userId = req.usuario.id
+
+        // verificar se o usuario existe
+        const user = await Usuario.findOne({
+            where: {
+                id: userId
+            }
+        })
+
+        if (!user) {
+            return res.status(404).json({message: "Usuário não encontrado"})
+        }
+
+        const methods = await MetodoPagamento.findAll({
+            where: {
+                usuarioId: userId
+            }
+        })
+
+        return res.status(200).json(methods)
+    } catch (error) {
+        return res.status(500).json({message:"Erro interno do servidor"})
+    }
+}
+
 module.exports = {
-    createPaymentMethod
+    createPaymentMethod,
+    getPaymentMethods
 }
