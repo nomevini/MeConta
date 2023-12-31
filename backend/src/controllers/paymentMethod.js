@@ -75,7 +75,51 @@ const getPaymentMethods = async (req, res) => {
     }
 }
 
+const deletePaymentMethod = async (req, res) => {
+    try {
+        
+        const userId = req.usuario.id
+        const paymentId = req.params.id
+
+        // verificar se o usuario existe
+        const user = await Usuario.findOne({
+            where: {
+                id: userId
+            }
+        })
+
+        if (!user) {
+            return res.status(404).json({message: "Usuário não encontrado"})
+        }
+
+        // verificar se o metodo existe
+        const method = await MetodoPagamento.findOne({
+            where: {
+                id: paymentId,
+                usuarioId: userId
+            }
+        })
+
+        if (!method) {
+            return res.status(404).json({message: "Método de pagamento não encontrado"})
+        }
+
+        await MetodoPagamento.destroy({
+            where: {
+                id: paymentId,
+                usuarioId: userId
+            }
+        })
+
+        return res.status(200).json({message: "Método de pagamento excluído com sucesso"})
+
+    } catch (error) {
+        return res.status(500).json({message: "Erro interno do servidor"})
+    }
+}
+
 module.exports = {
     createPaymentMethod,
-    getPaymentMethods
+    getPaymentMethods,
+    deletePaymentMethod
 }

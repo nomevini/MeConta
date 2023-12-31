@@ -5,7 +5,7 @@ const { createTip, getTip, updateTip, deleteTip } = require('../controllers/tip'
 const { createCategory, getCategory } = require('../controllers/category')
 const {createGoal, getGoals, deleteGoal, updateGoal} = require('../controllers/goals')
 const { createTransaction } = require('../controllers/transaction')
-const { createPaymentMethod, getPaymentMethods } = require('../controllers/paymentMethod')
+const { createPaymentMethod, getPaymentMethods, deletePaymentMethod } = require('../controllers/paymentMethod')
 
 const routes = express()
 
@@ -34,7 +34,7 @@ routes.get('/categoria/:userId', getCategory) // listar uma categoria
 
 routes.post('/metodo-pagamento', createPaymentMethod) // cadastrar um metodo de pagamento
 routes.get('/metodo-pagamento', getPaymentMethods) // listar os metodos de pagamento
-routes.delete('/metodo-pagamento/:id') // deletar um metodo de pagamento
+routes.delete('/metodo-pagamento/:id', deletePaymentMethod) // deletar um metodo de pagamento
 
 routes.get('/relatorio') // gerar relatorio de gastos mensais
 routes.get('/transacoes/filtrar') // filtrar transacao
