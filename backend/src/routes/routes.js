@@ -1,13 +1,17 @@
 const express = require('express')
-const { registerUser, deleteUser, login, resetPassword, updatePassword } = require('../controllers/user')
+const { registerUser, deleteUser, login, resetPassword, updatePassword, updateUser, getUser} = require('../controllers/user')
 const authentication = require('../middlewares/authentication')
 const { createTip, getTip, updateTip, deleteTip } = require('../controllers/tip')
 const { createCategory, getCategory } = require('../controllers/category')
 const {createGoal, getGoals, deleteGoal, updateGoal} = require('../controllers/goals')
 const { createTransaction } = require('../controllers/transaction')
 const { createPaymentMethod, getPaymentMethods, deletePaymentMethod } = require('../controllers/paymentMethod')
-
 const routes = express()
+const multer = require('multer');
+
+// Configuração do Multer para lidar com o upload de imagens
+const storage = multer.memoryStorage();
+const upload = multer({ dest: 'uploads/' });
 
 // rotas publicas
 
@@ -20,7 +24,8 @@ routes.put('/atualizar-senha/:token', updatePassword)
 routes.use(authentication)
 
 // rotas privadas
-routes.put('/usuario', ) // Editar usuario
+routes.get('/usuario/:userId', getUser)
+routes.put('/usuario/:userId', updateUser) // Editar usuario
 routes.delete('/usuario', deleteUser) // Deletar usuario
 
 routes.get('/balanco', ) // buscar despesa mensal, receita mensal e balanco

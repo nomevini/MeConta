@@ -1,5 +1,5 @@
 import { parseJwt } from "./authorization.js";
-import { toastError } from "./toast.js";
+import { toastError } from "./toastError.js";
 
 // Função para adicionar uma meta à tabela
 async function createGoal() {
