@@ -3,12 +3,9 @@ const Usuario = require("../models/user")
 
 const createPaymentMethod = async (req, res) => {
     try {
+        const {nome, usuarioId} = req.body
 
-   
-
-        const {nome, renovarSaldo, valorAdicionado, dataRenovacao, usuarioId} = req.body
-
-        if (!nome || !renovarSaldo || !valorAdicionado || !dataRenovacao | !usuarioId) {
+        if (!nome || !usuarioId) {
             return res.status(400).json({message: "Campos obrigatórios não fornecidos"})
         }
 
@@ -37,9 +34,6 @@ const createPaymentMethod = async (req, res) => {
 
         const payementMethod = await MetodoPagamento.create({
             nome,
-            renovarSaldo,
-            valorAdicionado,
-            dataRenovacao: new Date(dataRenovacao),
             usuarioId
         })
 
@@ -96,7 +90,7 @@ const deletePaymentMethod = async (req, res) => {
     try {
         
         const userId = req.usuario.id
-        const paymentId = req.params.id
+        const {nome} = req.body
 
         // verificar se o usuario existe
         const user = await Usuario.findOne({
@@ -112,7 +106,7 @@ const deletePaymentMethod = async (req, res) => {
         // verificar se o metodo existe
         const method = await MetodoPagamento.findOne({
             where: {
-                id: paymentId,
+                nome,
                 usuarioId: userId
             }
         })
@@ -123,7 +117,7 @@ const deletePaymentMethod = async (req, res) => {
 
         await MetodoPagamento.destroy({
             where: {
-                id: paymentId,
+                nome,
                 usuarioId: userId
             }
         })

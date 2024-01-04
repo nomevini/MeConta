@@ -2,3 +2,4 @@
 /backend/pg_credentials.js
 /backend/jwt_credentials.js
 .vscode
+/frontend/IMGUR_CLIENT_ID.js

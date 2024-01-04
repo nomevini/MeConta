@@ -2,7 +2,7 @@ const express = require('express')
 const { registerUser, deleteUser, login, resetPassword, updatePassword, updateUser, getUser} = require('../controllers/user')
 const authentication = require('../middlewares/authentication')
 const { createTip, getTip, updateTip, deleteTip } = require('../controllers/tip')
-const { createCategory, getCategory } = require('../controllers/category')
+const { createCategory, getCategory, deletecategory } = require('../controllers/category')
 const {createGoal, getGoals, deleteGoal, updateGoal} = require('../controllers/goals')
 const { createTransaction } = require('../controllers/transaction')
 const { createPaymentMethod, getPaymentMethods, deletePaymentMethod } = require('../controllers/paymentMethod')
@@ -36,6 +36,7 @@ routes.delete('/transacoes/:id', ) // editar uma despesa ou receita de um usuari
 
 routes.post('/categoria', createCategory) // cadastrar uma categoria
 routes.get('/categoria/:userId', getCategory) // listar uma categoria
+routes.delete('/categoria/:userId', deletecategory)
 
 routes.post('/metodo-pagamento', createPaymentMethod) // cadastrar um metodo de pagamento
 routes.get('/metodo-pagamento/:userId', getPaymentMethods) // listar os metodos de pagamento

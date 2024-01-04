@@ -87,7 +87,45 @@ const getCategory = async (req, res) => {
     }
 }
 
+const deletecategory = async (req, res) => {
+    try {
+        const usuarioId = req.params.userId
+        const {nome} = req.body
+
+
+        const user = await Usuario.findByPk(usuarioId)
+
+        if (!user) {
+            return res.status(404).json({message: 'Usuário não encontrado'})
+        }
+
+        const categoria = await Categoria.findOne({
+            where: {
+                usuarioId,
+                nome
+            }
+        })
+
+        if (!categoria) {
+            return res.status(404).json({message: "Categoria não encontrada"})
+        }
+
+        await Categoria.destroy({
+            where: {
+                usuarioId,
+                nome
+            }
+        })
+
+        return res.status(200).json({message: "Categoria excluída com sucesso"})
+
+    } catch (error) {
+        return res.status(500).json({message: "erro interno do servidor"})
+    }
+}
+
 module.exports = {
     createCategory,
-    getCategory
+    getCategory,
+    deletecategory
 };
