@@ -139,8 +139,83 @@ const getTransaction = async (req, res) => {
     }
 }
 
+const updateTransaction = async (req, res) => {
+    try {
+        let {descricao, categoria, metodoPagamento, valor, status, qtdParcelas, dataTransacao, metaId, usuarioId} = req.body
+        const transactionId = req.params.id
+        
+        // verificar informacoes
+        if (!descricao || !categoria || !metodoPagamento || !valor || !status || !qtdParcelas || !dataTransacao || !usuarioId) {
+            return res.status(400).json({ error: 'Campos obrigatórios não fornecidos.'})  
+        }
+        
+        // verificar se o usuario existe
+        const user = await User.findByPk(usuarioId)
+        
+        if (!user) {
+            return res.status(404).json({message: 'Usuário não encontrado'})
+        }
+
+        // verificar se o metodo de pagamento existe
+        const payment = await MetodoPagamento.findOne({
+            where: {
+                nome: metodoPagamento
+            }
+        })
+
+        if (!payment) {
+            return res.status(404).json({message: "Metodo de pagamento não cadastrado"})
+        }
+
+        // capturar id do metodo
+        const paymentId = payment.dataValues.id
+
+        // verificar se a categoria existe
+        const category = await Categoria.findOne({
+            where: {
+                nome: categoria
+            }
+        })
+
+        if (!category) {
+            return res.status(404).json({message: "Categoria não existente"})
+        }
+
+        const categoryId = category.dataValues.id
+
+        const transaction = await Transacao.findByPk(transactionId)
+
+        if (!transaction) {
+            return res.status(404).json({message: "Transação não encontrada"})
+        }
+
+        await Transacao.update({
+            descricao,
+            categoria: categoryId,
+            metodoPagamento: paymentId,
+            valor,
+            qtdParcelas,
+            dataTransacao,
+            metaId,
+            usuarioId,
+            status
+        }, {
+            where: {
+                id: transactionId
+            }
+        })
+
+        return res.status(200).json({message: "Transação alterada"})
+    
+    } catch (error) {
+        console.log(error.message)
+        return res.status(500).json({message: "Erro interno do servidor"})
+    }
+}
+
 
 module.exports = {
     createTransaction,
-    getTransaction
+    getTransaction,
+    updateTransaction
 }
