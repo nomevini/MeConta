@@ -107,6 +107,40 @@ const createTransaction = async (req, res) => {
     }
 }
 
+const getTransaction = async (req, res) => {
+    try {
+        const pagina = parseInt(req.query.pagina) || 1;
+        const itensPorPagina = parseInt(req.query.itensPorPagina) || 6;
+
+        const usuarioId = req.usuario.id
+
+
+        const { count, rows } = await Transacao.findAndCountAll({
+            offset: (pagina - 1) * itensPorPagina,
+            limit: itensPorPagina,
+            where: {
+                usuarioId
+            },
+            include: [{ model: Categoria, attributes: ['nome'] }, {model: MetodoPagamento, attributes: ['nome']}],
+            order: [['dataTransacao', 'DESC']], // Adiciona esta linha para ordenar por data de publicação decrescente
+        });
+
+        const totalPaginas = Math.ceil(count / itensPorPagina);
+
+        res.status(200).json({
+            paginaAtual: pagina,
+            totalPaginas: totalPaginas,
+            transacoes: rows,
+        });
+
+    } catch (error) {
+        console.error('Erro:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+}
+
+
 module.exports = {
-    createTransaction
+    createTransaction,
+    getTransaction
 }
