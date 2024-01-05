@@ -40,12 +40,39 @@ const createCategory = async (req, res) => {
 
         res.status(201).json({ message: 'Categoria criada com sucesso.', categoria: novaCategoria });
     } catch (error) {
-        console.error('Erro ao criar/verificar categoria:', error);
         res.status(500).json({ error: 'Erro interno do servidor.' });
     }
 };
 
-const getCategory = async (req, res) => {
+const getUserCategories = async (req, res) => {
+    const {userId} = req.params
+
+    try {
+
+        if (!userId) {
+            return res.status(400).json({ error: 'Campos obrigatórios não fornecidos.' });
+        }
+
+        let usuarioId = userId
+
+        const usuarioExistente = await Usuario.findByPk(usuarioId);
+        if (!usuarioExistente) {
+            return res.status(404).json({ error: 'Usuário não encontrado.' });
+        }
+
+        const categoriasUsuario = await Categoria.findAll({
+            where: { usuarioId: usuarioId },
+            attributes: ['nome'],
+        });
+
+        return res.status(200).json(categoriasUsuario)   
+    } catch (error) {
+        res.status(500).json({ error: 'Erro interno do servidor.' });
+    }
+}
+
+
+const getDefaultCategories = async (req, res) => {
     const {userId} = req.params
 
     try {
@@ -69,20 +96,8 @@ const getCategory = async (req, res) => {
             attributes: ['nome'],
         });
   
-        const categoriasUsuario = await Categoria.findAll({
-            where: { usuarioId: usuarioId },
-            attributes: ['nome'],
-        });
-
-        if (!categoriasUsuario.length) {
-            return res.status(200).json(categoriasAdmin)
-        }else if (userId == userAdmin) {
-            return res.status(200).json(categoriasAdmin) // se o usuario for admin
-        }else {
-            return res.status(200).json(categoriasAdmin.concat(categoriasUsuario))
-        }   
+        return res.status(200).json(categoriasAdmin)   
     } catch (error) {
-        console.error('Erro ao criar/verificar categoria:', error);
         res.status(500).json({ error: 'Erro interno do servidor.' });
     }
 }
@@ -126,6 +141,7 @@ const deletecategory = async (req, res) => {
 
 module.exports = {
     createCategory,
-    getCategory,
-    deletecategory
+    getDefaultCategories,
+    deletecategory,
+    getUserCategories
 };

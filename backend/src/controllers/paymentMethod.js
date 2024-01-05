@@ -44,7 +44,36 @@ const createPaymentMethod = async (req, res) => {
     }
 }
 
-const getPaymentMethods = async (req, res) => {
+const getUserPaymentMethods = async (req, res) => {
+    try {
+
+        const {userId} = req.params
+
+        if (!userId) {
+            return res.status(400).json({ error: 'Campos obrigatórios não fornecidos.' });
+        }
+
+        let usuarioId = userId
+
+        const usuarioExistente = await Usuario.findByPk(usuarioId);
+
+        if (!usuarioExistente) {
+            return res.status(404).json({ error: 'Usuário não encontrado.' });
+        }
+
+        const metodoPagamentoUsuario = await MetodoPagamento.findAll({
+            where: { usuarioId: usuarioId },
+            attributes: ['nome'],
+        });
+
+        return res.status(200).json(metodoPagamentoUsuario)
+          
+    } catch (error) {
+        return res.status(500).json({message:"Erro interno do servidor"})
+    }
+}
+
+const getDefaultPaymentMethods = async (req, res) => {
     try {
 
         const {userId} = req.params
@@ -69,18 +98,7 @@ const getPaymentMethods = async (req, res) => {
             attributes: ['nome'],
         });
   
-        const metodoPagamentoUsuario = await MetodoPagamento.findAll({
-            where: { usuarioId: usuarioId },
-            attributes: ['nome'],
-        });
-
-        if (!metodoPagamentoUsuario.length) {
-            return res.status(200).json(metodoPagamentoAdmin)
-        }else if (userId == userAdmin) {
-            return res.status(200).json(metodoPagamentoAdmin) // se o usuario for admin
-        }else {
-            return res.status(200).json(metodoPagamentoAdmin.concat(metodoPagamentoUsuario))
-        }  
+        return res.status(200).json(metodoPagamentoAdmin)
     } catch (error) {
         return res.status(500).json({message:"Erro interno do servidor"})
     }
@@ -131,6 +149,7 @@ const deletePaymentMethod = async (req, res) => {
 
 module.exports = {
     createPaymentMethod,
-    getPaymentMethods,
+    getDefaultPaymentMethods,
+    getUserPaymentMethods,
     deletePaymentMethod
 }

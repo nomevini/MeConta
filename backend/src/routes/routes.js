@@ -2,16 +2,12 @@ const express = require('express')
 const { registerUser, deleteUser, login, resetPassword, updatePassword, updateUser, getUser} = require('../controllers/user')
 const authentication = require('../middlewares/authentication')
 const { createTip, getTip, updateTip, deleteTip } = require('../controllers/tip')
-const { createCategory, getCategory, deletecategory } = require('../controllers/category')
+const { createCategory, getDefaultCategories, deletecategory, getUserCategories } = require('../controllers/category')
 const {createGoal, getGoals, deleteGoal, updateGoal} = require('../controllers/goals')
 const { createTransaction } = require('../controllers/transaction')
-const { createPaymentMethod, getPaymentMethods, deletePaymentMethod } = require('../controllers/paymentMethod')
+const { createPaymentMethod, getPaymentMethods, deletePaymentMethod, getDefaultPaymentMethods, getUserPaymentMethods } = require('../controllers/paymentMethod')
 const routes = express()
 const multer = require('multer');
-
-// Configuração do Multer para lidar com o upload de imagens
-const storage = multer.memoryStorage();
-const upload = multer({ dest: 'uploads/' });
 
 // rotas publicas
 
@@ -35,11 +31,13 @@ routes.put('/transacoes/:id', ) // editar uma despesa ou receita de um usuario
 routes.delete('/transacoes/:id', ) // editar uma despesa ou receita de um usuario
 
 routes.post('/categoria', createCategory) // cadastrar uma categoria
-routes.get('/categoria/:userId', getCategory) // listar uma categoria
+routes.get('/categoria-sistema/:userId', getDefaultCategories) // listar uma categoria
+routes.get('/categoria-usuario/:userId', getUserCategories) // listar uma categoria
 routes.delete('/categoria/:userId', deletecategory)
 
 routes.post('/metodo-pagamento', createPaymentMethod) // cadastrar um metodo de pagamento
-routes.get('/metodo-pagamento/:userId', getPaymentMethods) // listar os metodos de pagamento
+routes.get('/metodo-pagamento-sistema/:userId', getDefaultPaymentMethods) // listar os metodos de pagamento padroes
+routes.get('/metodo-pagamento-usuario/:userId', getUserPaymentMethods) // listar os metodos de pagamento do usuario
 routes.delete('/metodo-pagamento/:id', deletePaymentMethod) // deletar um metodo de pagamento
 
 routes.get('/relatorio') // gerar relatorio de gastos mensais
