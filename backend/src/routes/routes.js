@@ -4,7 +4,7 @@ const authentication = require('../middlewares/authentication')
 const { createTip, getTip, updateTip, deleteTip } = require('../controllers/tip')
 const { createCategory, getDefaultCategories, deletecategory, getUserCategories } = require('../controllers/category')
 const {createGoal, getGoals, deleteGoal, updateGoal} = require('../controllers/goals')
-const { createTransaction, getTransaction, updateTransaction } = require('../controllers/transaction')
+const { createTransaction, getTransaction, updateTransaction, deleteTransaction } = require('../controllers/transaction')
 const { createPaymentMethod, getPaymentMethods, deletePaymentMethod, getDefaultPaymentMethods, getUserPaymentMethods } = require('../controllers/paymentMethod')
 const routes = express()
 const multer = require('multer');
@@ -28,7 +28,7 @@ routes.get('/balanco', ) // buscar despesa mensal, receita mensal e balanco
 routes.get('/transacoes', getTransaction) // listar as despesas de um usuario
 routes.post('/transacoes', createTransaction) // cadastrar uma despesa ou receita de um usuario
 routes.put('/transacoes/:id', updateTransaction) // editar uma despesa ou receita de um usuario
-routes.delete('/transacoes/:id', ) // editar uma despesa ou receita de um usuario
+routes.delete('/transacoes/:id', deleteTransaction) // editar uma despesa ou receita de um usuario
 routes.get('/transacoes/filtrar') // filtrar transacao
 
 routes.post('/categoria', createCategory) // cadastrar uma categoria

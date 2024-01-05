@@ -213,9 +213,40 @@ const updateTransaction = async (req, res) => {
     }
 }
 
+const deleteTransaction = async (req, res) => {
+    try {
+        const usuarioId = req.usuario.id
+        const transactionId = req.params.id
+
+        const user = await User.findByPk(usuarioId)
+
+        if (!user) {
+            return res.status(404).json({message: "Usuário não encontrado"})
+        }
+
+        const transaction = await Transacao.findOne({
+            where: {
+                id: transactionId,
+                usuarioId
+            }
+        })
+
+        if (!transaction) {
+            return res.status(404).json({message: "transação não encontrada"})
+        }
+
+        await transaction.destroy()
+
+        return res.status(201).json({message: "Transação deletada"})
+    } catch (error) {
+        return res.status(500).json({message: "Erro interno do servidor"})
+    }
+}
+
 
 module.exports = {
     createTransaction,
     getTransaction,
-    updateTransaction
+    updateTransaction,
+    deleteTransaction
 }
