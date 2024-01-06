@@ -235,17 +235,6 @@ footer {
     color: black;
 }
 
-#data-table .TransactionStatus.Pendence {
-    color: orange;
-}
-
- #data-table .TransactionStatus.Finished {
-    color: green;
-}
-
-#data-table .TransactionStatus.Canceled {
-    color: red;
-}
 
 .toggleButton {
     cursor: pointer;
@@ -315,6 +304,14 @@ footer {
 .footer-itens a:hover {
     text-decoration: none;
     color: var(--link-dark-green); /* Cor do texto dos links */
+}
+
+#btn-deletar-transacao {
+    background-color: white;
+}
+
+#btn-deletar-transacao img {
+    width: 25px;
 }
 
 @media screen and (max-width: 768px) {

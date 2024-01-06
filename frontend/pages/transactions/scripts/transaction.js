@@ -89,14 +89,28 @@ async function getTransactions({pagina=1,itensPorPagina=6}){
             appendTransactionInformation(transaction.CategoriaTransacao.nome, transactionTable)
             appendTransactionInformation(transaction.MetodoPagamento.nome, transactionTable)
             appendTransactionInformation(transaction.qtdParcelas, transactionTable)
-
+            appendTransactionInformation(corrigirFusoHorario(transaction.dataTransacao), transactionTable)
             if (transaction.status == "pendente") {
                 appendTransactionInformation(transaction.status, transactionTable, 'red')
             }else {
                 appendTransactionInformation(transaction.status, transactionTable, 'green')
             }
-            appendTransactionInformation(corrigirFusoHorario(transaction.dataTransacao), transactionTable)
+            
             transactionTable.id = transaction.id
+
+            const btnImg = document.createElement('img')
+            btnImg.src = './assets/excluir.png'
+            btnImg.alt = 'Deletar categoria'
+
+            const btnDeleteTransacao = document.createElement('button')
+            //btnDeleteTransacao.addEventListener('click', )
+            btnDeleteTransacao.id = 'btn-deletar-transacao'
+            btnDeleteTransacao.appendChild(btnImg)
+
+            const btn = document.createElement('th')
+            btn.appendChild(btnDeleteTransacao)
+
+            transactionTable.appendChild(btn)
 
             tableContent.appendChild(transactionTable)
         });
