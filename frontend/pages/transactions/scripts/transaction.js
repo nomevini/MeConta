@@ -103,7 +103,7 @@ async function getTransactions({pagina=1,itensPorPagina=6}){
             btnImg.alt = 'Deletar categoria'
 
             const btnDeleteTransacao = document.createElement('button')
-            //btnDeleteTransacao.addEventListener('click', )
+            btnDeleteTransacao.addEventListener('click', deleteTransaction)
             btnDeleteTransacao.id = 'btn-deletar-transacao'
             btnDeleteTransacao.appendChild(btnImg)
 
@@ -145,6 +145,31 @@ function corrigirFusoHorario(dataStr) {
     const dataFormatada = dataCorrigida.toLocaleDateString('pt-BR', options);
 
     return dataFormatada;
+}
+
+async function deleteTransaction() {
+    
+    const transactionId = this.parentNode.parentNode.id
+
+    try {
+
+        const token = sessionStorage.getItem('token')
+
+        let response = await fetch(`http://localhost:3000/transacoes/${transactionId}`, {
+            method: 'DELETE',
+            headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            },
+        });
+
+        const data = await response.json()
+        location.reload()
+
+        console.log(data)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 export {data, getTransactions}
