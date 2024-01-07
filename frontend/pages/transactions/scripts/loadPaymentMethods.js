@@ -56,10 +56,12 @@ loadPaymentMethods()
 function insertPaymentMethodOnSelect(paymentMethods) {
     paymentMethods.forEach(method => {
         const selectElement = document.getElementById('paymentMethod-transaction');
+        const editSelectElement = document.getElementById('edit-paymentMethod-transaction')
 
         const option = document.createElement('option');
         option.text = method.nome;
         selectElement.appendChild(option);
+        editSelectElement.appendChild(option)
     })
 }
 

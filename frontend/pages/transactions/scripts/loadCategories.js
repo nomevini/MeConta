@@ -60,11 +60,13 @@ function insertCategoriesOnSelect(categories){
     categories.forEach(categoria => {
 
         const selectElement = document.getElementById('category-transaction');
+        const editSelectElement = document.getElementById('edit-category-transaction')
           
         // inserir no select
         const option = document.createElement('option');
         option.text = categoria.nome;
         selectElement.appendChild(option);
+        editSelectElement.appendChild(option);
 
     });
 }
