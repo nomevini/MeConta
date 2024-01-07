@@ -66,8 +66,10 @@ function insertCategoriesOnSelect(categories){
         const option = document.createElement('option');
         option.text = categoria.nome;
         selectElement.appendChild(option);
-        editSelectElement.appendChild(option);
 
+        const option2 = document.createElement('option');
+        option2.text = categoria.nome;
+        editSelectElement.appendChild(option2);
     });
 }
 

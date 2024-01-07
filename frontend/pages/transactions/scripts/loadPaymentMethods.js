@@ -61,7 +61,10 @@ function insertPaymentMethodOnSelect(paymentMethods) {
         const option = document.createElement('option');
         option.text = method.nome;
         selectElement.appendChild(option);
-        editSelectElement.appendChild(option)
+
+        const option2 = document.createElement('option');
+        option2.text = method.nome;
+        editSelectElement.appendChild(option2)
     })
 }
 

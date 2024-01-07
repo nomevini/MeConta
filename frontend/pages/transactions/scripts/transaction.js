@@ -5,7 +5,7 @@ const transactionForm = document.getElementById('transaction-form')
 transactionForm.addEventListener('submit', async function(e){
     e.preventDefault()
 
-    const type = this.parentNode.childNodes[1].type
+    const type = this.parentNode.childNodes[1].type    
     
     const description = document.getElementById('description-transaction').value
     const category = document.getElementById('category-transaction').value
@@ -18,7 +18,6 @@ transactionForm.addEventListener('submit', async function(e){
     if (type == 'despesa') {
         amount *= -1
     }
-
 
     if (!description || !amount || !category || !paymentMethod || !stats || !numberPayments || !date) {
         toastError("Todos os campos devem ser preenchidos")
@@ -82,7 +81,7 @@ async function getTransactions({pagina=1,itensPorPagina=6}){
         
         data.transacoes.forEach(transaction => {
             const transactionTable = document.createElement('tr')
-            transactionTable.onclick = editTransaction
+            
 
             appendTransactionInformation(transaction.descricao, transactionTable)
             appendTransactionInformation(transaction.valor, transactionTable)
@@ -126,6 +125,7 @@ const data = await getTransactions({pagina:1,itensPorPagina:9})
 
 function appendTransactionInformation(information, parent, color=undefined){
     const transactionDescription = document.createElement('th')
+    transactionDescription.onclick = editTransaction
     transactionDescription.innerHTML = information    
 
     if (color) {
@@ -174,35 +174,35 @@ async function deleteTransaction() {
 
 function editTransaction(){
 
-    document.getElementById('edit-description-transaction').value = this.childNodes[0].innerHTML
-    document.getElementById('edit-amount-transaction').value = this.childNodes[1].innerHTML
+    document.getElementById('edit-description-transaction').value = this.parentNode.childNodes[0].innerHTML
+    document.getElementById('edit-amount-transaction').value = this.parentNode.childNodes[1].innerHTML
 
     const categoryOptions = document.getElementById('edit-category-transaction').options
     for (const option of categoryOptions) {
-        if (option.innerHTML == this.childNodes[2].innerHTML) {
+        if (option.innerHTML == this.parentNode.childNodes[2].innerHTML) {
             document.getElementById('edit-category-transaction').selectedIndex = option.index
         }
     }
 
     const paymentMethodOptions = document.getElementById('edit-paymentMethod-transaction').options
     for (const option of paymentMethodOptions) {
-        if (option.innerHTML == this.childNodes[3].innerHTML) {
+        if (option.innerHTML == this.parentNode.childNodes[3].innerHTML) {
             document.getElementById('edit-paymentMethod-transaction').selectedIndex = option.index
         }
     }
 
     const statsOptions = document.getElementById('edit-stats-transaction').options
     for (const option of statsOptions) {
-        if (option.innerHTML == this.childNodes[6].innerHTML) {
+        if (option.innerHTML == this.parentNode.childNodes[6].innerHTML) {
             document.getElementById('edit-stats-transaction').selectedIndex = option.index
         }
     }
 
-    document.getElementById('edit-numberPayments').value = this.childNodes[4].innerHTML
+    document.getElementById('edit-numberPayments').value = this.parentNode.childNodes[4].innerHTML
     
-    document.getElementById('edit-date-transaction').value = formatStringDate(this.childNodes[5].innerHTML)
+    document.getElementById('edit-date-transaction').value = formatStringDate(this.parentNode.childNodes[5].innerHTML)
 
-    document.getElementById('edit-transaction-form').transactionId = this.id
+    document.getElementById('edit-transaction-form').transactionId = this.parentNode.id
 
     Modal.open('editar','modal-editar-transacao')
 }
