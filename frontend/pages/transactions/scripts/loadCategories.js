@@ -41,12 +41,16 @@ async function loadTipCategories() {
             insertCategoriesOnSelect(userCategories)
             insertCategoriesOnSelect(defaultCategories)
             insertCategoriesOnMyCategories(userCategories)
+
+            const categories = defaultCategories.concat(userCategories)
+            sessionStorage.setItem('categories', JSON.stringify(categories));
             
         }else {
+            sessionStorage.setItem('categories', JSON.stringify(defaultCategories));
+            console.log(defaultCategories)
             insertCategoriesOnSelect(defaultCategories)
             insertCategoriesOnMyCategories(defaultCategories)
         }
-
 
     } catch (error) {
         console.error(error);
@@ -61,6 +65,7 @@ function insertCategoriesOnSelect(categories){
 
         const selectElement = document.getElementById('category-transaction');
         const editSelectElement = document.getElementById('edit-category-transaction')
+        const filterSelectElement = document.getElementById('filter-category-transaction')
           
         // inserir no select
         const option = document.createElement('option');
@@ -70,6 +75,10 @@ function insertCategoriesOnSelect(categories){
         const option2 = document.createElement('option');
         option2.text = categoria.nome;
         editSelectElement.appendChild(option2);
+
+        const option3 = document.createElement('option');
+        option3.text = categoria.nome;
+        filterSelectElement.appendChild(option3);
     });
 }
 

@@ -2,15 +2,72 @@ import { appendTransactionInformation, corrigirFusoHorario, deleteTransaction } 
 
 document.getElementById('filter-transaction-form').addEventListener('submit', async function(e) {
     e.preventDefault()
-    console.log('Filtrar')
+
+    const description = document.getElementById('filter-description-transaction').value
+    const category = document.getElementById('filter-category-transaction').value
+    const paymentMethod = document.getElementById('filter-paymentMethod-transaction').value
+    const stats = document.getElementById('filter-stats-transaction').value
+    const numberPayments = document.getElementById('filter-numberPayments').value
+    const date = document.getElementById('filter-date-transaction').value
+    let amount = document.getElementById('filter-amount-transaction').value
+
+    const categories = JSON.parse(sessionStorage.getItem('categories'));
+    let categoryId; 
+    categories.forEach(categoryEle => {
+        if(categoryEle.nome == category){
+            categoryId = categoryEle.id
+        }
+    })
+
+    const paymentMethods = JSON.parse(sessionStorage.getItem('paymentMethods'));
+    let paymentMethodId; 
+    paymentMethods.forEach(paymentMethodEle => {
+        if(paymentMethodEle.nome == paymentMethod){
+            paymentMethodId = paymentMethodEle.id
+        }
+    })
+
+
+    // Construa o objeto de filtro
+    const filtro = {};
+    if (description) filtro.descricao = description;
+    if (categoryId) filtro.categoria = categoryId;
+    if (paymentMethodId) filtro.metodoPagamento = paymentMethodId;
+    if (amount) filtro.valor = amount;
+    if (stats) filtro.status = stats;
+    if (numberPayments) filtro.qtdParcelas = numberPayments;
+    if (date) filtro.dataTransacao = date;
+  
+    // Faça a requisição ao backend somente se pelo menos um campo estiver preenchido
+    if (Object.keys(filtro).length > 0) {
+      // Construa a URL com os parâmetros de filtro
+      const queryString = new URLSearchParams(filtro).toString();
+      const url = `http://localhost:3000/transacoes/filtrar?${queryString}`;
+
+      const token = sessionStorage.getItem('token')
+  
+      // Faça a requisição ao backend
+      const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            }
+        });
+
+      const transacoesFiltradas = await response.json();
+  
+      loadTransaction(transacoesFiltradas);
+      this.reset()
+      Modal.close('modal-filtrar')
+    }
+
 })
 
 document.getElementById('btn-filter-name').addEventListener('click', async function(){
     const descricao = document.getElementById('search-bar').value
 
     const token = sessionStorage.getItem('token')
-
-    console.log(descricao)
     
     try {
         let response = await fetch(`http://localhost:3000/transacoes/filtrar-desc?descricao=${descricao}`, {

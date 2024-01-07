@@ -39,7 +39,12 @@ async function loadPaymentMethods() {
             insertPaymentMethodOnSelect(userPaymentMethods)
             insertPaymentMethodOnSelect(defaultPaymentMethods)
             insertPaymentMethodOnMyCategories(userPaymentMethods)
+
+            const paymentMethods = defaultPaymentMethods.concat(userPaymentMethods)
+            sessionStorage.setItem('paymentMethods', JSON.stringify(paymentMethods));
+            
         }else {
+            sessionStorage.setItem('paymentMethods', JSON.stringify(defaultPaymentMethods));
             insertPaymentMethodOnSelect(defaultPaymentMethods)
             insertPaymentMethodOnMyCategories(defaultPaymentMethods)
         }
@@ -57,6 +62,7 @@ function insertPaymentMethodOnSelect(paymentMethods) {
     paymentMethods.forEach(method => {
         const selectElement = document.getElementById('paymentMethod-transaction');
         const editSelectElement = document.getElementById('edit-paymentMethod-transaction')
+        const filterSelectElement = document.getElementById('filter-paymentMethod-transaction')
 
         const option = document.createElement('option');
         option.text = method.nome;
@@ -65,6 +71,10 @@ function insertPaymentMethodOnSelect(paymentMethods) {
         const option2 = document.createElement('option');
         option2.text = method.nome;
         editSelectElement.appendChild(option2)
+
+        const option3 = document.createElement('option');
+        option3.text = method.nome;
+        filterSelectElement.appendChild(option3)
     })
 }
 
