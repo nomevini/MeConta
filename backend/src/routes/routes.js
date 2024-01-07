@@ -8,6 +8,7 @@ const { createTransaction, getTransaction, updateTransaction, deleteTransaction 
 const { createPaymentMethod, getPaymentMethods, deletePaymentMethod, getDefaultPaymentMethods, getUserPaymentMethods } = require('../controllers/paymentMethod')
 const routes = express()
 const multer = require('multer');
+const { transactionNameFilter, transactionFilter } = require('../controllers/filter')
 
 // rotas publicas
 
@@ -29,7 +30,9 @@ routes.get('/transacoes', getTransaction) // listar as despesas de um usuario
 routes.post('/transacoes', createTransaction) // cadastrar uma despesa ou receita de um usuario
 routes.put('/transacoes/:id', updateTransaction) // editar uma despesa ou receita de um usuario
 routes.delete('/transacoes/:id', deleteTransaction) // editar uma despesa ou receita de um usuario
-routes.get('/transacoes/filtrar') // filtrar transacao
+
+routes.get('/transacoes/filtrar-desc', transactionNameFilter) // filtrar transacao
+routes.get('/transacoes/filtrar', transactionFilter) // filtrar transacao
 
 routes.post('/categoria', createCategory) // cadastrar uma categoria
 routes.get('/categoria-sistema/:userId', getDefaultCategories) // listar uma categoria
