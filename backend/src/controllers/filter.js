@@ -1,4 +1,6 @@
 const Transacao = require('../models/transaction')
+const Categoria = require('../models/transactionCategory')
+const MetodoPagamento = require('../models/paymentMethod')
 const { Op } = require('sequelize');
 
 const transactionNameFilter = async (req, res) => {
@@ -17,6 +19,8 @@ const transactionNameFilter = async (req, res) => {
   
       const transacoesFiltradas = await Transacao.findAll({
         where: conditions,
+        include: [{ model: Categoria, attributes: ['nome'] }, {model: MetodoPagamento, attributes: ['nome']}],
+        order: [['dataTransacao', 'DESC']]
       });
   
       res.json(transacoesFiltradas);
@@ -66,6 +70,8 @@ const transactionFilter =async (req, res) => {
       // Realizando a busca no banco de dados
       const transacoesFiltradas = await Transacao.findAll({
         where: conditions,
+        include: [{ model: Categoria, attributes: ['nome'] }, {model: MetodoPagamento, attributes: ['nome']}],
+        order: [['dataTransacao', 'DESC']], 
       });
   
       // Retornando os resultados

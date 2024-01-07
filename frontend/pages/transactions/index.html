@@ -77,15 +77,15 @@
               </div>
 
             <div class="filter-search-container">
-                <button class="btn filtro" onclick="Modal.open('filtrar', 'modal-transacao')">
+                <button class="btn filtro" onclick="Modal.open('filtrar', 'modal-filtrar')">
                     
                     <img class="IconFiltro" src="./assets/VectordefinirFiltro.svg" alt="Filtrar transação">
                 </button>
         
-                <input type="text" class="search-bar" placeholder="Buscar">
+                <input id="search-bar" type="text" class="search-bar" placeholder="Buscar">
                 
-                <button class="btn buscar" onclick="">
-                    <img class="IconLupa" src="./assets/VectorIconLupa.svg" alt="Buscar transações">
+                <button id="btn-filter-name" class="btn buscar" onclick="">
+                    <img  class="IconLupa" src="./assets/VectorIconLupa.svg" alt="Buscar transações">
                 </button>
             </div>
             
@@ -380,6 +380,68 @@
         </div>
     </div>
 
+    <div class="modal-overlay modal-filtrar">
+        <div class="modal">
+            <div id="form">
+                <h2 id="modal-title">Filtrar</h2>
+
+                <form action="" id="filter-transaction-form">
+                    <div class="input-group">
+                        <label for="description" class="sr-only">Descrição</label>
+                        <input type="text" id="filter-description-transaction" name="description" placeholder="Descrição">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Valor total</label>
+                        <input type="number" id="filter-amount-transaction" name="amount" placeholder="0,00" step="0.01">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Categoria</label>
+        
+                        <select id="filter-category-transaction" name="category"placeholder="Categoria">
+                            <option value="" selected disabled>Categoria</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Forma de pagamento</label>
+                
+                        <select id="filter-paymentMethod-transaction" name="paymentMethod" placeholder="Forma de pagamento">
+                            <option value="" selected disabled>Forma de pagamento</option>
+                            
+                          </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Status</label>
+                    
+                        <select id="filter-stats-transaction" name="stats" placeholder="Status">
+                            <option value="" selected disabled>Escolha o status da transação</option>
+                            <option value="Finalizada">Finalizada</option>
+                            <option value="Pendente">Pendente</option>
+                          </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Quantidade de parcelas</label>
+                        <input type="number" id="filter-numberPayments" name="numberPayments" placeholder="Quantidade de parcelas">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="date" class="sr-only">Data</label>
+                        <input type="date" id="filter-date-transaction" name="date">
+                    </div>
+
+                    <div class="input-group actions">
+                        <a href="#" onclick="Modal.close('modal-filtrar')" class="button cancel">Cancelar</a>
+                        <button id="modal-button" type="submit">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <div id="toast">
         <div class="img"><h1>×</h1></div>
@@ -409,6 +471,7 @@
     <script src="./scripts/toastError.js" type="module"></script>
     <script src="./scripts/transaction.js" type="module"></script>
     <script src="./scripts/pagination.js" type="module"></script>
+    <script src="./scripts/filter.js" type="module"></script>
 
 </body>
 </html>

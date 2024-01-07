@@ -123,7 +123,7 @@ async function getTransactions({pagina=1,itensPorPagina=6}){
 
 const data = await getTransactions({pagina:1,itensPorPagina:9})
 
-function appendTransactionInformation(information, parent, color=undefined){
+export function appendTransactionInformation(information, parent, color=undefined){
     const transactionDescription = document.createElement('th')
     transactionDescription.onclick = editTransaction
     transactionDescription.innerHTML = information    
@@ -135,7 +135,7 @@ function appendTransactionInformation(information, parent, color=undefined){
     parent.appendChild(transactionDescription)
 }
 
-function corrigirFusoHorario(dataStr) {
+export function corrigirFusoHorario(dataStr) {
     const data = new Date(dataStr);
 
     const umDiaEmMilissegundos = 24 * 60 * 60 * 1000;
@@ -147,7 +147,7 @@ function corrigirFusoHorario(dataStr) {
     return dataFormatada;
 }
 
-async function deleteTransaction() {
+export async function deleteTransaction() {
     
     const transactionId = this.parentNode.parentNode.id
 
