@@ -198,3 +198,8 @@ small.help-for-modal {
 #delete-payment-title {
     margin-top: 20px;
 }
+
+.informations {
+    height: 600px;
+    overflow-y: scroll;
+}

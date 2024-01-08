@@ -113,7 +113,7 @@
               </tbody>
             </table>
         </section>
-        <button class="btn gerarRelatorio acimaRodape" onclick="Modal.open('Relatório','modal-relatorio')">
+        <button id="btn-relatorio" class="btn gerarRelatorio acimaRodape" onclick="Modal.open('Relatório','modal-relatorio')">
             <img src="./assets/IconGerarRelatorio.svg" alt="Adicionar despesa">
             <p>Gerar relatório</p>
         </button>
@@ -230,40 +230,41 @@
             <div id="form">
                 <h2 id="modal-title">Relatório Mensal</h2>
                 <form action="">
+
+                    <div class="informations">
                     
-                    <div class="balance">
-                        <p>Balanço Mensal</p>
-                        <p id="valor-balanco">R$1.200</p>
-                    </div>
-
-                    <div class="despesas">
-                        <h3>Despesas</h3>
-                        <div class="despesa">
-                            <p>Alimentação</p>
-                            <p id="valor-despesa">R$300</p>
+                        <div class="balance">
+                            <p>Balanço Mensal</p>
+                            <p id="valor-balanco">R$1.200</p>
                         </div>
 
-                        <div class="despesa">
-                            <p>Farmácia</p>
-                            <p id="valor-despesa">R$30</p>
+                        <div class="balance">
+                            <p>Receita Mensal</p>
+                            <p id="valor-receita-balanco">R$1.200</p>
                         </div>
-                    </div>
 
-                    <div class="receitas">
-                        <h3>Receitas</h3>
-                        <div class="receita">
-                            <p>Trabalho</p>
-                            <p id="valor-receita">R$2.300</p>
+                        <div class="balance">
+                            <p>Despesa Mensal</p>
+                            <p id="valor-despesa-balanco">R$1.200</p>
                         </div>
-                        <div class="receita">
-                            <p>Freelancer</p>
-                            <p id="valor-receita">R$800</p>
-                        </div>
-                    </div>
 
-                    <div class="grafico">
-                        grafico
+                        <div class="despesas">
+                            <h3>Despesas</h3>
+                            
+
+                        </div>
+
+                        <div class="receitas">
+                            <h3>Receitas</h3>
+                            
+                        </div>
+
+                        <div class="grafico">
+                            grafico
+                        </div>
+
                     </div>
+                    
                     <div class="input-group actions">
                         <a href="#" onclick="Modal.close('modal-relatorio')" class="button cancel">Sair</a>
                         <button id="modal-button" type="submit">Baixar</button>
@@ -472,6 +473,7 @@
     <script src="./scripts/transaction.js" type="module"></script>
     <script src="./scripts/pagination.js" type="module"></script>
     <script src="./scripts/filter.js" type="module"></script>
+    <script src="./scripts/report.js" type="module"></script>
 
 </body>
 </html>
