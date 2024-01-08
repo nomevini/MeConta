@@ -117,8 +117,6 @@ async function loadUserInformations(){
 
     response = await response.json()
 
-    console.log(response)
-
     // inserir informacoes nos campos
     const {nome, sobrenome, sexo, dataNascimento, imagemPerfil} = response
 

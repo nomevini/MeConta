@@ -63,7 +63,7 @@ const getUserPaymentMethods = async (req, res) => {
 
         const metodoPagamentoUsuario = await MetodoPagamento.findAll({
             where: { usuarioId: usuarioId },
-            attributes: ['nome'],
+            attributes: ['nome', 'id'],
         });
 
         return res.status(200).json(metodoPagamentoUsuario)
@@ -95,7 +95,7 @@ const getDefaultPaymentMethods = async (req, res) => {
         // buscar todas as categorias desses ususarios  
         const metodoPagamentoAdmin = await MetodoPagamento.findAll({
             where: { usuarioId: userAdmin },
-            attributes: ['nome'],
+            attributes: ['nome', 'id'],
         });
   
         return res.status(200).json(metodoPagamentoAdmin)

@@ -62,7 +62,7 @@ const getUserCategories = async (req, res) => {
 
         const categoriasUsuario = await Categoria.findAll({
             where: { usuarioId: usuarioId },
-            attributes: ['nome'],
+            attributes: ['nome', 'id'],
         });
 
         return res.status(200).json(categoriasUsuario)   
@@ -93,7 +93,7 @@ const getDefaultCategories = async (req, res) => {
         // buscar todas as categorias desses ususarios  
         const categoriasAdmin = await Categoria.findAll({
             where: { usuarioId: userAdmin },
-            attributes: ['nome'],
+            attributes: ['nome', 'id'],
         });
   
         return res.status(200).json(categoriasAdmin)   

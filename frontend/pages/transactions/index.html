@@ -77,15 +77,15 @@
               </div>
 
             <div class="filter-search-container">
-                <button class="btn filtro" onclick="Modal.open('filtrar', 'modal-transacao')">
+                <button class="btn filtro" onclick="Modal.open('filtrar', 'modal-filtrar')">
                     
                     <img class="IconFiltro" src="./assets/VectordefinirFiltro.svg" alt="Filtrar transação">
                 </button>
         
-                <input type="text" class="search-bar" placeholder="Buscar">
+                <input id="search-bar" type="text" class="search-bar" placeholder="Buscar">
                 
-                <button class="btn buscar" onclick="">
-                    <img class="IconLupa" src="./assets/VectorIconLupa.svg" alt="Buscar transações">
+                <button id="btn-filter-name" class="btn buscar" onclick="">
+                    <img  class="IconLupa" src="./assets/VectorIconLupa.svg" alt="Buscar transações">
                 </button>
             </div>
             
@@ -102,10 +102,10 @@
                     <th>Categoria</th>
                     <th>Tipo de pagamento</th>
                     <th>Parcela</th>
-                    <th>Status</th>
                     <th>Data</th>
+                    <th>Status</th>
+                    <th></th>
                 </tr>
-                <!---->
                 
               </thead>
               <tbody id="transaction-content">
@@ -113,7 +113,7 @@
               </tbody>
             </table>
         </section>
-        <button class="btn gerarRelatorio acimaRodape" onclick="Modal.open('Relatório','modal-relatorio')">
+        <button id="btn-relatorio" class="btn gerarRelatorio acimaRodape" onclick="Modal.open('Relatório','modal-relatorio')">
             <img src="./assets/IconGerarRelatorio.svg" alt="Adicionar despesa">
             <p>Gerar relatório</p>
         </button>
@@ -157,8 +157,8 @@
                     
                         <select id="stats-transaction" name="stats" placeholder="Status">
                             <option value="" selected disabled>Escolha o status da transação</option>
-                            <option value="finalizada">Finalizada</option>
-                            <option value="pendente">Pendente</option>
+                            <option value="Finalizada">Finalizada</option>
+                            <option value="Pendente">Pendente</option>
                           </select>
                     </div>
 
@@ -226,47 +226,47 @@
     </div>
 
     <div class="modal-overlay modal-relatorio">
-        <div class="modal">
+        <div class="modal relatorio">
             <div id="form">
                 <h2 id="modal-title">Relatório Mensal</h2>
                 <form action="">
+
+                    <div class="informations">
                     
-                    <div class="balance">
-                        <p>Balanço Mensal</p>
-                        <p id="valor-balanco">R$1.200</p>
-                    </div>
-
-                    <div class="despesas">
-                        <h3>Despesas</h3>
-                        <div class="despesa">
-                            <p>Alimentação</p>
-                            <p id="valor-despesa">R$300</p>
+                        <div class="balance">
+                            <p>Balanço Mensal</p>
+                            <p id="valor-balanco">R$1.200</p>
                         </div>
 
-                        <div class="despesa">
-                            <p>Farmácia</p>
-                            <p id="valor-despesa">R$30</p>
+                        <div class="balance">
+                            <p>Receita Mensal</p>
+                            <p id="valor-receita-balanco">R$1.200</p>
                         </div>
-                    </div>
 
-                    <div class="receitas">
-                        <h3>Receitas</h3>
-                        <div class="receita">
-                            <p>Trabalho</p>
-                            <p id="valor-receita">R$2.300</p>
+                        <div class="balance">
+                            <p>Despesa Mensal</p>
+                            <p id="valor-despesa-balanco">R$1.200</p>
                         </div>
-                        <div class="receita">
-                            <p>Freelancer</p>
-                            <p id="valor-receita">R$800</p>
-                        </div>
-                    </div>
 
-                    <div class="grafico">
-                        grafico
+                        <div class="despesas">
+                            <h3>Despesas</h3>
+                            
+
+                        </div>
+
+                        <div class="receitas">
+                            <h3>Receitas</h3>
+                            
+                        </div>
+
+                        <div class="grafico">
+                            <canvas id="grafico"></canvas>
+                        </div>
+
                     </div>
-                    <div class="input-group actions">
+                    
+                    <div class="input-group">
                         <a href="#" onclick="Modal.close('modal-relatorio')" class="button cancel">Sair</a>
-                        <button id="modal-button" type="submit">Baixar</button>
                     </div>
                 </form>
             </div>
@@ -318,6 +318,130 @@
         </div>
     </div>
 
+    <div class="modal-overlay modal-editar-transacao">
+        <div class="modal">
+            <div id="form">
+                <h2 id="modal-title-edit">Nova Transação</h2>
+
+                <form action="" id="edit-transaction-form">
+                    <div class="input-group">
+                        <label for="description" class="sr-only">Descrição</label>
+                        <input type="text" id="edit-description-transaction" name="description" placeholder="Descrição">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Valor total</label>
+                        <input type="number" id="edit-amount-transaction" name="amount" placeholder="0,00" step="0.01">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Categoria</label>
+        
+                        <select id="edit-category-transaction" name="category"placeholder="Categoria">
+                            <option value="" selected disabled>Categoria</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Forma de pagamento</label>
+                
+                        <select id="edit-paymentMethod-transaction" name="paymentMethod" placeholder="Forma de pagamento">
+                            <option value="" selected disabled>Forma de pagamento</option>
+                            
+                          </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Status</label>
+                    
+                        <select id="edit-stats-transaction" name="stats" placeholder="Status">
+                            <option value="" selected disabled>Escolha o status da transação</option>
+                            <option value="Finalizada">Finalizada</option>
+                            <option value="Pendente">Pendente</option>
+                          </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Quantidade de parcelas</label>
+                        <input type="number" id="edit-numberPayments" name="numberPayments" placeholder="Quantidade de parcelas">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="date" class="sr-only">Data</label>
+                        <input type="date" id="edit-date-transaction" name="date">
+                    </div>
+
+                    <div class="input-group actions">
+                        <a href="#" onclick="Modal.close('modal-editar-transacao')" class="button cancel">Cancelar</a>
+                        <button id="modal-button" type="submit">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay modal-filtrar">
+        <div class="modal">
+            <div id="form">
+                <h2 id="modal-title">Filtrar</h2>
+
+                <form action="" id="filter-transaction-form">
+                    <div class="input-group">
+                        <label for="description" class="sr-only">Descrição</label>
+                        <input type="text" id="filter-description-transaction" name="description" placeholder="Descrição">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Valor total</label>
+                        <input type="number" id="filter-amount-transaction" name="amount" placeholder="0,00" step="0.01">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Categoria</label>
+        
+                        <select id="filter-category-transaction" name="category"placeholder="Categoria">
+                            <option value="" selected disabled>Categoria</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Forma de pagamento</label>
+                
+                        <select id="filter-paymentMethod-transaction" name="paymentMethod" placeholder="Forma de pagamento">
+                            <option value="" selected disabled>Forma de pagamento</option>
+                            
+                          </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Status</label>
+                    
+                        <select id="filter-stats-transaction" name="stats" placeholder="Status">
+                            <option value="" selected disabled>Escolha o status da transação</option>
+                            <option value="Finalizada">Finalizada</option>
+                            <option value="Pendente">Pendente</option>
+                          </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Quantidade de parcelas</label>
+                        <input type="number" id="filter-numberPayments" name="numberPayments" placeholder="Quantidade de parcelas">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="date" class="sr-only">Data</label>
+                        <input type="date" id="filter-date-transaction" name="date">
+                    </div>
+
+                    <div class="input-group actions">
+                        <a href="#" onclick="Modal.close('modal-filtrar')" class="button cancel">Cancelar</a>
+                        <button id="modal-button" type="submit">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <div id="toast">
         <div class="img"><h1>×</h1></div>
@@ -347,6 +471,10 @@
     <script src="./scripts/toastError.js" type="module"></script>
     <script src="./scripts/transaction.js" type="module"></script>
     <script src="./scripts/pagination.js" type="module"></script>
+    <script src="./scripts/filter.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+    <script src="./scripts/report.js" type="module"></script>
 
 </body>
 </html>

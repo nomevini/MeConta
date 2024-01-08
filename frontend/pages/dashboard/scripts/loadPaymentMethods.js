@@ -1,6 +1,5 @@
 import { toastError } from "./toastError.js"
 import { parseJwt } from "./authorization.js";
-import { deletarMetodoPagamento } from "./paymentMethod.js"
 
 async function loadPaymentMethods() {
 
@@ -38,7 +37,6 @@ async function loadPaymentMethods() {
             userPaymentMethods = await response.json()  
             insertPaymentMethodOnSelect(userPaymentMethods)
             insertPaymentMethodOnSelect(defaultPaymentMethods)
-            insertPaymentMethodOnMyCategories(userPaymentMethods)
 
             const paymentMethods = defaultPaymentMethods.concat(userPaymentMethods)
             sessionStorage.setItem('paymentMethods', JSON.stringify(paymentMethods));
@@ -46,7 +44,7 @@ async function loadPaymentMethods() {
         }else {
             sessionStorage.setItem('paymentMethods', JSON.stringify(defaultPaymentMethods));
             insertPaymentMethodOnSelect(defaultPaymentMethods)
-            insertPaymentMethodOnMyCategories(defaultPaymentMethods)
+          
         }
 
 
@@ -68,39 +66,5 @@ function insertPaymentMethodOnSelect(paymentMethods) {
         option.text = method.nome;
         selectElement.appendChild(option);
 
-        const option2 = document.createElement('option');
-        option2.text = method.nome;
-        editSelectElement.appendChild(option2)
-
-        const option3 = document.createElement('option');
-        option3.text = method.nome;
-        filterSelectElement.appendChild(option3)
     })
-}
-
-function insertPaymentMethodOnMyCategories(paymentMethods) {
-    paymentMethods.forEach(method => {
-        // inserir nas categorias já criadas
-        const divCategories = document.querySelector(".paymentMethods")
-
-        const divCategoria = document.createElement('div')
-        divCategoria.className = 'input-group'
-        divCategoria.id = 'delete-payment'
-
-        const nomeCategoria = document.createElement('p')
-        nomeCategoria.innerHTML = method.nome
-
-        const btnImg = document.createElement('img')
-        btnImg.src = './assets/minus.svg'
-        btnImg.alt = 'Deletar método de pagamento'
-
-        const btnDeletarMetodo = document.createElement('button')
-        btnDeletarMetodo.appendChild(btnImg)
-        btnDeletarMetodo.addEventListener('click', deletarMetodoPagamento)
-
-        divCategoria.appendChild(nomeCategoria)
-        divCategoria.appendChild(btnDeletarMetodo)
-
-        divCategories.appendChild(divCategoria)
-    });
 }

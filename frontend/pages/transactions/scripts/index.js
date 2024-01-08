@@ -2,11 +2,15 @@ const Modal = {
     open(transactionType, modalClass) {
         const modal = document.querySelector(`.${modalClass}`)
         const modalTitle = document.querySelector("#modal-title")
-
-        if(transactionType == 'filtrar'){
+        
+        if(transactionType == 'filtrar' ){
             modalTitle.innerText = `${capitalizeFirstLetter(transactionType)}`
             modalTitle.type = transactionType
-        }else {
+        }else if(transactionType == 'editar'){
+            const modalTitle = document.querySelector("#modal-title-edit")
+            modalTitle.innerText = `${capitalizeFirstLetter(transactionType)}`
+            modalTitle.type = transactionType
+        } else {
             modalTitle.innerText = `Nova ${capitalizeFirstLetter(transactionType)}`
             modalTitle.type = transactionType
         }
