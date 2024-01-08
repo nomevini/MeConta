@@ -80,6 +80,7 @@ const consultarVariacoesDiarias = async (primeiroDiaMes, ultimoDiaMes) => {
           [Op.between]: [primeiroDiaMes, ultimoDiaMes],
         },
       },
+      order: [['dataTransacao', 'ASC']], // Adiciona a cláusula order para ordenar pela dataTransacao
     });
 
     // Mapear as transações para a estrutura desejada

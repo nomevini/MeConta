@@ -21,6 +21,7 @@ transactionForm.addEventListener('submit', async function(e){
 
     if (!description || !amount || !category || !paymentMethod || !stats || !numberPayments || !date) {
         toastError("Todos os campos devem ser preenchidos")
+        return
     }
 
     try {
@@ -89,7 +90,7 @@ async function getTransactions({pagina=1,itensPorPagina=6}){
             appendTransactionInformation(transaction.MetodoPagamento.nome, transactionTable)
             appendTransactionInformation(transaction.qtdParcelas, transactionTable)
             appendTransactionInformation(corrigirFusoHorario(transaction.dataTransacao), transactionTable)
-            if (transaction.status == "pendente") {
+            if (transaction.status == "Pendente") {
                 appendTransactionInformation(transaction.status, transactionTable, 'red')
             }else {
                 appendTransactionInformation(transaction.status, transactionTable, 'green')
