@@ -226,7 +226,7 @@
     </div>
 
     <div class="modal-overlay modal-relatorio">
-        <div class="modal">
+        <div class="modal relatorio">
             <div id="form">
                 <h2 id="modal-title">Relatório Mensal</h2>
                 <form action="">
@@ -260,14 +260,13 @@
                         </div>
 
                         <div class="grafico">
-                            grafico
+                            <canvas id="grafico"></canvas>
                         </div>
 
                     </div>
                     
-                    <div class="input-group actions">
+                    <div class="input-group">
                         <a href="#" onclick="Modal.close('modal-relatorio')" class="button cancel">Sair</a>
-                        <button id="modal-button" type="submit">Baixar</button>
                     </div>
                 </form>
             </div>
@@ -473,6 +472,8 @@
     <script src="./scripts/transaction.js" type="module"></script>
     <script src="./scripts/pagination.js" type="module"></script>
     <script src="./scripts/filter.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
     <script src="./scripts/report.js" type="module"></script>
 
 </body>

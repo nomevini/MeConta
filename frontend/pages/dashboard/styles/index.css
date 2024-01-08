@@ -349,6 +349,15 @@ footer {
     cursor: pointer;
 }
 
+#btn-deletar-transacao {
+    background-color: white;
+}
+
+#btn-deletar-transacao img {
+    width: 25px;
+}
+
+
 @media screen and (max-width: 768px) {
     #img-logo-menu  {
         display: block !important; 

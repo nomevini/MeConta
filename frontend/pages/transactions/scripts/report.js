@@ -69,7 +69,47 @@ document.getElementById('btn-relatorio').addEventListener('click', async functio
             receita.appendChild(valorReceita)
             container.appendChild(receita)
         });    
-    
+
+      const labels = data.variacoesDiarias.map(item => moment(item.data).format('DD/MM/YYYY'));
+      const dadosReceitas = data.variacoesDiarias.map(item => item.receitas);
+      const dadosDespesas = data.variacoesDiarias.map(item => Math.abs(item.despesas));
+
+      const maiorDespesa = Math.max(...dadosDespesas);
+
+      const ctx = document.getElementById('grafico').getContext('2d');
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Receitas',
+              borderColor: 'green',
+              backgroundColor: 'rgba(0, 128, 0, 0.1)',
+              data: dadosReceitas,
+            },
+            {
+              label: 'Despesas',
+              borderColor: 'red',
+              backgroundColor: 'rgba(255, 0, 0, 0.1)',
+              data: dadosDespesas,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            x: {
+              type: 'category',
+            },
+            y: {
+              beginAtZero: true,
+              max: maiorDespesa,
+            },
+          },
+        },
+      });
+
 
     } catch (error) {
         

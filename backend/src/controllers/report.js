@@ -72,27 +72,44 @@ const agruparTransacoesPorCategoria = transacoesDoMes => {
 
 // Função para consultar variações diárias de despesas e receitas no mês
 const consultarVariacoesDiarias = async (primeiroDiaMes, ultimoDiaMes) => {
-  return await sequelize.query(`
-    SELECT
-      DATE(dataTransacao) as data,
-      SUM(CASE WHEN valor > 0 THEN valor ELSE 0 END) as receitas,
-      SUM(CASE WHEN valor < 0 THEN valor ELSE 0 END) as despesas
-    FROM
-      Transacoes
-    WHERE
-      dataTransacao BETWEEN :primeiroDiaMes AND :ultimoDiaMes
-    GROUP BY
-      data
-    ORDER BY
-      data;
-  `, {
-    replacements: {
-      primeiroDiaMes,
-      ultimoDiaMes,
-    },
-    type: sequelize.QueryTypes.SELECT,
-  });
+  try {
+    // Consultar todas as transações do mês atual
+    const transacoesDoMes = await Transacao.findAll({
+      where: {
+        dataTransacao: {
+          [Op.between]: [primeiroDiaMes, ultimoDiaMes],
+        },
+      },
+    });
+
+    // Mapear as transações para a estrutura desejada
+    const variacoesDiarias = transacoesDoMes.map(transacao => ({
+      data: transacao.dataTransacao.toISOString().split('T')[0],
+      receitas: transacao.valor > 0 ? transacao.valor : 0,
+      despesas: transacao.valor < 0 ? Math.abs(transacao.valor) : 0,
+    }));
+
+    // Agrupar as variações diárias por data
+    const agrupadoPorData = variacoesDiarias.reduce((agrupado, variacao) => {
+      if (!agrupado[variacao.data]) {
+        agrupado[variacao.data] = { data: variacao.data, receitas: 0, despesas: 0 };
+      }
+
+      agrupado[variacao.data].receitas += variacao.receitas;
+      agrupado[variacao.data].despesas += variacao.despesas;
+
+      return agrupado;
+    }, {});
+
+    // Converter o objeto agrupado para um array
+    const resultadoFinal = Object.values(agrupadoPorData);
+
+    return resultadoFinal;
+  } catch (error) {
+    throw error;
+  }
 };
+
 
 const relatorioMensal = async (req, res) => {
   try {
@@ -108,25 +125,18 @@ const relatorioMensal = async (req, res) => {
     // Calcular o balanço do mês considerando a inversão de valores para despesas
     const balancoMensal = calcularBalançoMensal(transacoesDoMes);
 
-     // Agrupar transações por categoria
+    // Agrupar transações por categoria
      const transacoesPorCategoria = agruparTransacoesPorCategoria(transacoesDoMes);
 
-    return res.status(200).json({
-        balancoMensal,
-        transacoesPorCategoria
-    })
-
-   
-/* 
     // Consultar variações diárias de despesas e receitas no mês
     const variacoesDiarias = await consultarVariacoesDiarias(primeiroDiaMes, ultimoDiaMes);
 
-    // Se precisar, você pode enviar esses dados para o frontend ou fazer qualquer outra coisa com eles
-    res.json({
-      balancoMensal,
-      transacoesPorCategoria,
-      variacoesDiarias,
-    }); */
+    return res.status(200).json({
+        balancoMensal,
+        transacoesPorCategoria,
+        variacoesDiarias
+    })
+
   } catch (error) {
     console.error('Erro ao gerar relatório mensal:', error);
     res.status(500).json({ error: 'Erro interno do servidor' });
