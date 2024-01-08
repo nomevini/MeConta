@@ -9,6 +9,7 @@ const { createPaymentMethod, getPaymentMethods, deletePaymentMethod, getDefaultP
 const routes = express()
 const multer = require('multer');
 const { transactionNameFilter, transactionFilter } = require('../controllers/filter')
+const { relatorioMensal } = require('../controllers/report')
 
 // rotas publicas
 
@@ -25,7 +26,7 @@ routes.get('/usuario/:userId', getUser)
 routes.put('/usuario/:userId', updateUser) // Editar usuario
 routes.delete('/usuario', deleteUser) // Deletar usuario
 
-routes.get('/balanco', ) // buscar despesa mensal, receita mensal e balanco
+routes.get('/balanco', relatorioMensal) // buscar despesa mensal, receita mensal e balanco
 routes.get('/transacoes', getTransaction) // listar as despesas de um usuario
 routes.post('/transacoes', createTransaction) // cadastrar uma despesa ou receita de um usuario
 routes.put('/transacoes/:id', updateTransaction) // editar uma despesa ou receita de um usuario
