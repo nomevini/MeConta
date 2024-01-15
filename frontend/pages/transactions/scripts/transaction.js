@@ -40,7 +40,7 @@ transactionForm.addEventListener('submit', async function(e){
                 metodoPagamento: paymentMethod,
                 valor: amount,
                 status:stats,
-                qtdParcelas: 1,
+                qtdParcelas: numberPayments,
                 dataTransacao: date,
                 usuarioId: decodedToken.userId
             })
@@ -85,7 +85,7 @@ async function getTransactions({pagina=1,itensPorPagina=6}){
             
 
             appendTransactionInformation(transaction.descricao, transactionTable)
-            appendTransactionInformation(transaction.valor, transactionTable)
+            appendTransactionInformation(`R$${transaction.valor}`, transactionTable)
             appendTransactionInformation(transaction.CategoriaTransacao.nome, transactionTable)
             appendTransactionInformation(transaction.MetodoPagamento.nome, transactionTable)
             appendTransactionInformation(transaction.qtdParcelas, transactionTable)
