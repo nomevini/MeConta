@@ -40,15 +40,14 @@ transactionForm.addEventListener('submit', async function(e){
                 metodoPagamento: paymentMethod,
                 valor: amount,
                 status:stats,
-                qtdParcelas: 1,
+                qtdParcelas: numberPayments,
                 dataTransacao: date,
                 usuarioId: decodedToken.userId
             })
         });
 
         const data = await response.json()
-        console.log(data)
-
+        
         document.getElementById('transaction-form').reset()
         location.reload()
     } catch (error) {
@@ -85,7 +84,7 @@ async function getTransactions({pagina=1,itensPorPagina=6}){
             
 
             appendTransactionInformation(transaction.descricao, transactionTable)
-            appendTransactionInformation(transaction.valor, transactionTable)
+            appendTransactionInformation(`R$${transaction.valor}`, transactionTable)
             appendTransactionInformation(transaction.CategoriaTransacao.nome, transactionTable)
             appendTransactionInformation(transaction.MetodoPagamento.nome, transactionTable)
             appendTransactionInformation(transaction.qtdParcelas, transactionTable)
@@ -122,7 +121,7 @@ async function getTransactions({pagina=1,itensPorPagina=6}){
     }
 }
 
-const data = await getTransactions({pagina:1,itensPorPagina:9})
+const data = await getTransactions({pagina:1,itensPorPagina:7})
 
 export function appendTransactionInformation(information, parent, color=undefined){
     const transactionDescription = document.createElement('th')
@@ -176,7 +175,8 @@ export async function deleteTransaction() {
 function editTransaction(){
 
     document.getElementById('edit-description-transaction').value = this.parentNode.childNodes[0].innerHTML
-    document.getElementById('edit-amount-transaction').value = this.parentNode.childNodes[1].innerHTML
+    document.getElementById('edit-amount-transaction').value = this.parentNode.childNodes[1].innerHTML.replace('R$','')
+  
 
     const categoryOptions = document.getElementById('edit-category-transaction').options
     for (const option of categoryOptions) {
