@@ -1,9 +1,19 @@
 const { Sequelize } = require('sequelize');
-const credentials = require('../../pg_credentials')
+require('dotenv').config()
 
-const sequelize = new Sequelize('meconta', credentials.user, credentials.password, {
-  host: 'localhost', // Endereço do servidor PostgreSQL
-  dialect: 'postgres', // Tipo de banco de dados
+// Pegar a URL do banco de dados das variáveis de ambiente
+const databaseUrl = process.env.DATABASE_URL;
+
+// Criar uma instância do Sequelize
+const sequelize = new Sequelize(databaseUrl, {
+  dialect: 'postgres', // Especifica que estamos usando PostgreSQL
+  protocol: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false, // Aceita certificados auto-assinados
+    },
+  },
 });
 
 module.exports = sequelize;

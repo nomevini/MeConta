@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
-const jwt_credentials = require('../../jwt_credentials')
+require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const generateToken = require('../utils/token')
 const generateHtmlContent = require('../utils/htmlResetEmail');
@@ -74,7 +74,7 @@ const login = async (req, res) => {
         if (user && bcrypt.compareSync(senha, user.senha)) {
 
             // Gerar um token JWT
-            const token = jwt.sign({ userId: user.id, admin: user.admin }, jwt_credentials.password, { expiresIn: '8h' });
+            const token = jwt.sign({ userId: user.id, admin: user.admin }, process.env.JWT_SECRET , { expiresIn: process.env.JWT_EXPIRES_IN });
 
             const {senha: _, ...authenticatedUser} = user.dataValues
 
