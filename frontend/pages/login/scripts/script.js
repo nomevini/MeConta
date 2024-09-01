@@ -97,7 +97,7 @@ async function registerUser(admin=undefined) {
             throw new Error(error.error);
         }
 
-        window.location.href = '../successRegister/index.html';
+        window.location.href = './pages/successRegister/index.html';
         
     } catch (error) {
         console.error('Erro no cadastro de usuário:', error);
@@ -167,7 +167,7 @@ async function loginUser() {
         // armazenar o token no sessionStorage
         sessionStorage.setItem('token', data.token);
 
-        window.location.href = '../dashboard/index.html'
+        window.location.href = './pages/dashboard/index.html'
 
     } catch (error) {
         console.error('Erro no login do usuário:', error.message);
