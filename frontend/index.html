@@ -8,18 +8,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <link rel="stylesheet" href="./pages/login/styles/style.css">
-  <link rel="stylesheet" href="./pages/login/styles/toast.css">
-  <link rel="stylesheet" href="./pages/login/styles/animations.css">
+  <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="./styles/toast.css">
+  <link rel="stylesheet" href="./styles/animations.css">
 
-  <link rel="icon" href="./pages/login/assets/favicon.png" type="image/x-icon">
+  <link rel="icon" href="./assets/favicon.png" type="image/x-icon">
   <title>Login - MeConta</title>
 
 </head>
 <body>
   <div class="main">
     <div class="login">
-      <img class="logo" src="./pages/login/assets/logo.svg" alt="Logo MeConta">
+      <img class="logo" src="assets/logo.svg" alt="Logo MeConta">
       <div class="login-wrapper">
         <div class="login-header">  
           <h1>Acesse a plataforma</h1>
@@ -35,11 +35,11 @@
                 <div class="input-wrapper">
                     <div class="password-header">
                         <label for="password">Senha</label>
-                        <a href="./pages/resetPassword/index.html">Esqueceu a senha?</a>
+                        <a href="../resetPassword/index.html">Esqueceu a senha?</a>
                     </div>
                     <input type="password" placeholder="Digite sua senha" id="input-password">
-                    <img id="olho-off" src="./pages/login/assets/icon-eye-off.svg" alt="Ícone olho cortado" class="eye" onclick="handleEye('olho-off', 'olho-on', 'input-password')">
-                    <img id="olho-on" src="./pages/login/assets/icon-eye-on.svg" alt="Ícone olho" class="eye d-none" onclick="handleEye('olho-on', 'olho-off', 'input-password')">
+                    <img id="olho-off" src="assets/icon-eye-off.svg" alt="Ícone olho cortado" class="eye" onclick="handleEye('olho-off', 'olho-on', 'input-password')">
+                    <img id="olho-on" src="assets/icon-eye-on.svg" alt="Ícone olho" class="eye d-none" onclick="handleEye('olho-on', 'olho-off', 'input-password')">
                 </div>
             </div>
 
@@ -76,8 +76,8 @@
                         <label for="signup-password">Senha</label>
                     </div>
                     <input type="password" placeholder="Digite sua senha" id="signup-password">
-                    <img id="signup-olho-off" src="./pages/login/assets/icon-eye-off.svg" alt="Ícone olho cortado" class="eye" onclick="handleEye('signup-olho-off', 'signup-olho-on', 'signup-password')">
-                    <img id="signup-olho-on" src="./pages/login/assets/icon-eye-on.svg" alt="Ícone olho" class="eye d-none" onclick="handleEye('signup-olho-on', 'signup-olho-off', 'signup-password')">
+                    <img id="signup-olho-off" src="assets/icon-eye-off.svg" alt="Ícone olho cortado" class="eye" onclick="handleEye('signup-olho-off', 'signup-olho-on', 'signup-password')">
+                    <img id="signup-olho-on" src="assets/icon-eye-on.svg" alt="Ícone olho" class="eye d-none" onclick="handleEye('signup-olho-on', 'signup-olho-off', 'signup-password')">
                 </div>
             </div>
         
@@ -95,7 +95,7 @@
       </div>
   </div>
 
-  <script src="./pages/login/scripts/script.js"></script>
+  <script src="./script.js"></script>
 
 </body>
 </html>
