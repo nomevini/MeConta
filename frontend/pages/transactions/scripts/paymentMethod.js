@@ -22,7 +22,7 @@ document.getElementById('paymentMethod-form').addEventListener('submit', async f
             usuarioId: decodedToken.userId
         }
 
-        let response = await fetch(`http://localhost:3000/metodo-pagamento`, {
+        let response = await fetch(`https://meconta.onrender.com/metodo-pagamento`, {
             method: 'POST',
             headers: {
             'Authorization': `Bearer ${token}`,
@@ -56,7 +56,7 @@ export async function deletarMetodoPagamento() {
         const token = sessionStorage.getItem('token')
         const decodedToken = parseJwt(token)
     
-        let response = await fetch(`http://localhost:3000/metodo-pagamento/${decodedToken.userId}`, {
+        let response = await fetch(`https://meconta.onrender.com/metodo-pagamento/${decodedToken.userId}`, {
             method: 'DELETE',
             headers: {
             'Authorization': `Bearer ${token}`,

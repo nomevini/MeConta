@@ -18,7 +18,7 @@ async function createGoal() {
             usuarioId: decodedToken.userId
         }
 
-        let response = await fetch(`http://localhost:3000/meta`, {
+        let response = await fetch(`https://meconta.onrender.com/meta`, {
                 method: 'POST',
                 headers: {
                 'Authorization': `Bearer ${token}`,

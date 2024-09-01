@@ -25,7 +25,7 @@ async function createCategory(nameCategory) {
             usuarioId: decodedToken.userId
         }
 
-        let response = await fetch(`http://localhost:3000/categoria`, {
+        let response = await fetch(`https://meconta.onrender.com/categoria`, {
                 method: 'POST',
                 headers: {
                 'Authorization': `Bearer ${token}`,
@@ -56,7 +56,7 @@ export async function deletarCategoria() {
     const token = sessionStorage.getItem('token')
     const decodedToken = parseJwt(token)
 
-    let response = await fetch(`http://localhost:3000/categoria/${decodedToken.userId}`, {
+    let response = await fetch(`https://meconta.onrender.com/categoria/${decodedToken.userId}`, {
         method: 'DELETE',
         headers: {
         'Authorization': `Bearer ${token}`,

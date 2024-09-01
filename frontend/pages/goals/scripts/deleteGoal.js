@@ -3,7 +3,7 @@ async function deleteGoal(goalId) {
         
         const token = sessionStorage.getItem('token')
       
-        let response = await fetch(`http://localhost:3000/meta/${goalId}`, {
+        let response = await fetch(`https://meconta.onrender.com/meta/${goalId}`, {
             method: 'DELETE',
             headers: {
             'Authorization': `Bearer ${token}`,

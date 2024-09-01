@@ -8,7 +8,7 @@ async function loadPaymentMethods() {
     const decodedToken = parseJwt(token);
 
     try {
-        let response = await fetch(`http://localhost:3000/metodo-pagamento-sistema/${decodedToken.userId}`, {
+        let response = await fetch(`https://meconta.onrender.com/metodo-pagamento-sistema/${decodedToken.userId}`, {
             method: 'GET',
             headers: {
             'Authorization': `Bearer ${token}`,
@@ -27,7 +27,7 @@ async function loadPaymentMethods() {
         if (!decodedToken.admin) {
             // usuario comum
             // carregar suas categorias
-            let response = await fetch(`http://localhost:3000/metodo-pagamento-usuario/${decodedToken.userId}`, {
+            let response = await fetch(`https://meconta.onrender.com/metodo-pagamento-usuario/${decodedToken.userId}`, {
                 method: 'GET',
                 headers: {
                 'Authorization': `Bearer ${token}`,

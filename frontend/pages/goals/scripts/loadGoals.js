@@ -3,7 +3,7 @@ async function loadGoals({pagina=1,itensPorPagina=6}) {
     const token = sessionStorage.getItem('token')
 
     try {
-        let response = await fetch(`http://localhost:3000/metas?pagina=${pagina}&itensPorPagina=${itensPorPagina}`, {
+        let response = await fetch(`https://meconta.onrender.com/metas?pagina=${pagina}&itensPorPagina=${itensPorPagina}`, {
             method: 'GET',
             headers: {
             'Authorization': `Bearer ${token}`,

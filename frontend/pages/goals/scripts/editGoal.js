@@ -19,7 +19,7 @@ async function editGoal(goalId) {
 
         console.log(goal.status)
 
-        let response = await fetch(`http://localhost:3000/meta/${goalId}`, {
+        let response = await fetch(`https://meconta.onrender.com/meta/${goalId}`, {
             method: 'PUT',
             headers: {
             'Authorization': `Bearer ${token}`,

@@ -8,7 +8,7 @@ async function loadTipCategories() {
     const decodedToken = parseJwt(token);
 
     try {
-        let response = await fetch(`http://localhost:3000/categoria-sistema/${decodedToken.userId}`, {
+        let response = await fetch(`https://meconta.onrender.com/categoria-sistema/${decodedToken.userId}`, {
             method: 'GET',
             headers: {
             'Authorization': `Bearer ${token}`,
@@ -29,7 +29,7 @@ async function loadTipCategories() {
         if (!decodedToken.admin) {
             // usuario comum
             // carregar suas categorias
-            let response = await fetch(`http://localhost:3000/categoria-usuario/${decodedToken.userId}`, {
+            let response = await fetch(`https://meconta.onrender.com/categoria-usuario/${decodedToken.userId}`, {
                 method: 'GET',
                 headers: {
                 'Authorization': `Bearer ${token}`,

@@ -42,7 +42,7 @@ document.getElementById('filter-transaction-form').addEventListener('submit', as
     if (Object.keys(filtro).length > 0) {
       // Construa a URL com os parâmetros de filtro
       const queryString = new URLSearchParams(filtro).toString();
-      const url = `http://localhost:3000/transacoes/filtrar?${queryString}`;
+      const url = `https://meconta.onrender.com/transacoes/filtrar?${queryString}`;
 
       const token = sessionStorage.getItem('token')
   
@@ -70,7 +70,7 @@ document.getElementById('btn-filter-name').addEventListener('click', async funct
     const token = sessionStorage.getItem('token')
     
     try {
-        let response = await fetch(`http://localhost:3000/transacoes/filtrar-desc?descricao=${descricao}`, {
+        let response = await fetch(`https://meconta.onrender.com/transacoes/filtrar-desc?descricao=${descricao}`, {
             method: 'GET',
             headers: {
             'Authorization': `Bearer ${token}`,

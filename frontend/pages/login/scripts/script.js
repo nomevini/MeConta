@@ -84,7 +84,7 @@ async function registerUser(admin=undefined) {
     user.admin = admin
 
     try {
-        let response = await fetch('http://localhost:3000/usuario', {
+        let response = await fetch('https://meconta.onrender.com/usuario', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
@@ -148,7 +148,7 @@ async function loginUser() {
     }
 
     try {
-        let response = await fetch('http://localhost:3000/login', {
+        let response = await fetch('https://meconta.onrender.com/login', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',

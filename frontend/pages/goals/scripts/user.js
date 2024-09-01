@@ -81,7 +81,7 @@ userForm.addEventListener('submit', async function(e) {
     }
 
     // enviar para o banco de dados
-    let response = await fetch(`http://localhost:3000/usuario/${decodedToken.userId}`, {
+    let response = await fetch(`https://meconta.onrender.com/usuario/${decodedToken.userId}`, {
         method: 'PUT',
         headers: {
         'Authorization': `Bearer ${token}`,
@@ -107,7 +107,7 @@ async function loadUserInformations(){
     const token = sessionStorage.getItem('token')
     const decodedToken = parseJwt(token);
 
-    let response = await fetch(`http://localhost:3000/usuario/${decodedToken.userId}`, {
+    let response = await fetch(`https://meconta.onrender.com/usuario/${decodedToken.userId}`, {
         method: 'GET',
         headers: {
         'Authorization': `Bearer ${token}`,

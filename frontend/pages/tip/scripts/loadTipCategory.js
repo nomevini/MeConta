@@ -6,7 +6,7 @@ async function loadTipCategories() {
     const decodedToken = parseJwt(token);
 
     try {
-        let response = await fetch(`http://localhost:3000/categoria-sistema/${decodedToken.userId}`, {
+        let response = await fetch(`https://meconta.onrender.com/categoria-sistema/${decodedToken.userId}`, {
             method: 'GET',
             headers: {
             'Authorization': `Bearer ${token}`,
@@ -40,7 +40,7 @@ async function loadTips({pagina=1,itensPorPagina=6}) {
 
         const token = sessionStorage.getItem('token')
 
-        let response = await fetch(`http://localhost:3000/dicas?pagina=${pagina}&itensPorPagina=${itensPorPagina}`, {
+        let response = await fetch(`https://meconta.onrender.com/dicas?pagina=${pagina}&itensPorPagina=${itensPorPagina}`, {
             method: 'GET',
             headers: {
             'Authorization': `Bearer ${token}`,

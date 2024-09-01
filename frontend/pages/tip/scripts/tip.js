@@ -13,7 +13,7 @@ document.getElementById('form-create-tip').addEventListener('submit', async func
             descricao: document.getElementById('description').value
         }
     
-        let response = await fetch(`http://localhost:3000/dica/${decodedToken.userId}`, {
+        let response = await fetch(`https://meconta.onrender.com/dica/${decodedToken.userId}`, {
             method: 'POST',
             headers: {
             'Authorization': `Bearer ${token}`,
@@ -42,7 +42,7 @@ document.querySelector('.save-tip').addEventListener('click', async function(e) 
 
         const token = sessionStorage.getItem('token')
 
-        let response = await fetch(`http://localhost:3000/dica/${tipId}`, {
+        let response = await fetch(`https://meconta.onrender.com/dica/${tipId}`, {
             method: 'PUT',
             headers: {
             'Authorization': `Bearer ${token}`,
@@ -72,7 +72,7 @@ document.querySelector('#modal-delete-button').addEventListener('click', async f
 
         const token = sessionStorage.getItem('token')
 
-        let response = await fetch(`http://localhost:3000/dica/${tipId}`, {
+        let response = await fetch(`https://meconta.onrender.com/dica/${tipId}`, {
             method: 'DELETE',
             headers: {
             'Authorization': `Bearer ${token}`,

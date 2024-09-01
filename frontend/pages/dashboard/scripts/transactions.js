@@ -27,7 +27,7 @@ transactionForm.addEventListener('submit', async function(e){
         const token = sessionStorage.getItem('token')
         const decodedToken = parseJwt(token)
 
-        let response = await fetch(`http://localhost:3000/transacoes`, {
+        let response = await fetch(`https://meconta.onrender.com/transacoes`, {
             method: 'POST',
             headers: {
             'Authorization': `Bearer ${token}`,
@@ -60,7 +60,7 @@ async function getTransactions({pagina=1,itensPorPagina=6}){
     try {
         const token = sessionStorage.getItem('token')
         
-        let response = await fetch(`http://localhost:3000/transacoes?pagina=${pagina}&itensPorPagina=${itensPorPagina}`, {
+        let response = await fetch(`https://meconta.onrender.com/transacoes?pagina=${pagina}&itensPorPagina=${itensPorPagina}`, {
             method: 'GET',
             headers: {
             'Authorization': `Bearer ${token}`,

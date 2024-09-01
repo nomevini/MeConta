@@ -27,7 +27,7 @@ async function sendRequest(){
     }
 
     try {
-        let response = await fetch(`http://localhost:3000/atualizar-senha/${token}`, {
+        let response = await fetch(`https://meconta.onrender.com/atualizar-senha/${token}`, {
             method: 'PUT',
             headers: {
             'Content-Type': 'application/json',

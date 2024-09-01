@@ -3,7 +3,7 @@ document.getElementById('btn-relatorio').addEventListener('click', async functio
 
         const token = sessionStorage.getItem('token')
 
-        let response = await fetch(`http://localhost:3000/balanco`, {
+        let response = await fetch(`https://meconta.onrender.com/balanco`, {
             method: 'GET',
             headers: {
             'Authorization': `Bearer ${token}`,

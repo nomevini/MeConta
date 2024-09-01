@@ -22,7 +22,7 @@ async function sendEmail(email){
     }
 
     try {
-        let response = await fetch('http://localhost:3000/recuperar-senha', {
+        let response = await fetch('https://meconta.onrender.com/recuperar-senha', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
