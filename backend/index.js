@@ -3,6 +3,7 @@ const cors = require('cors')
 const routes = require('./src/routes/routes')
 const app = express()
 
+app.use(express.json())
 
 // Configuração do CORS para permitir requisições do localhost
 const corsOptions = {
@@ -12,9 +13,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-
-app.use(express.json())
 app.use(routes)
 
 app.listen(3000)
