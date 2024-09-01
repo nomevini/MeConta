@@ -1,6 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 const routes = require('./src/routes/routes')
+const app = express()
+
 
 // Configuração do CORS para permitir requisições do localhost
 const corsOptions = {
@@ -11,7 +13,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-const app = express()
 
 app.use(express.json())
 app.use(routes)
